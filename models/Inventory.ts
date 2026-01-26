@@ -1,41 +1,39 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { getSequelize } from "@/lib/sequelize";
-import type { BusinessAttributes } from "./Business";
-import type { Inventory } from "./Inventory";
+import { WarehouseAttributes } from "./Warehouse";
 
-export interface WarehouseAttributes {
+export interface InventoryAttributes {
   id: string;
   businessId: string;
-  name: string;
-  address?: string;
-  description?: string;
-  isActive: boolean;
+  warehouseId: string;
+  createdBy?: string;
+  updatedBy?: string;
   createdAt: Date;
   updatedAt: Date;
-  business?: BusinessAttributes;
+  warehouse?: WarehouseAttributes;
 }
 
-type WarehouseCreationAttributes = Optional<
-  WarehouseAttributes,
-  "id" | "address" | "description" | "isActive" | "createdAt" | "updatedAt" | "business"
+type InventoryCreationAttributes = Optional<
+  InventoryAttributes,
+  "id" | "createdBy" | "updatedBy" | "createdAt" | "updatedAt"
 >;
 
-class Warehouse extends Model<WarehouseAttributes, WarehouseCreationAttributes> implements WarehouseAttributes {
+class Inventory extends Model<InventoryAttributes, InventoryCreationAttributes> implements InventoryAttributes {
   declare id: string;
   declare businessId: string;
-  declare name: string;
-  declare address?: string;
-  declare description?: string;
-  declare isActive: boolean;
+  declare warehouseId: string;
+  declare createdBy?: string;
+  declare updatedBy?: string;
   declare readonly createdAt: Date;
   declare readonly updatedAt: Date;
 
   // Associations will be defined in index.ts
-  public business?: BusinessAttributes;
-  public inventories?: Inventory[];
+  public business?: any;
+  public warehouse?: any;
+  public items?: any[];
 }
 
-Warehouse.init(
+Inventory.init(
   {
     id: {
       type: DataTypes.BIGINT,
@@ -47,23 +45,20 @@ Warehouse.init(
       allowNull: false,
       field: "business_id",
     },
-    name: {
-      type: DataTypes.STRING(255),
+    warehouseId: {
+      type: DataTypes.BIGINT,
       allowNull: false,
+      field: "warehouse_id",
     },
-    address: {
-      type: DataTypes.TEXT,
+    createdBy: {
+      type: DataTypes.BIGINT,
       allowNull: true,
+      field: "created_by",
     },
-    description: {
-      type: DataTypes.TEXT,
+    updatedBy: {
+      type: DataTypes.BIGINT,
       allowNull: true,
-    },
-    isActive: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: true,
-      field: "is_active",
+      field: "updated_by",
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -80,11 +75,11 @@ Warehouse.init(
   },
   {
     sequelize: getSequelize(),
-    tableName: "warehouses",
+    tableName: "inventories",
     timestamps: true,
     createdAt: "createdAt",
     updatedAt: "updatedAt",
   }
 );
 
-export { Warehouse };
+export { Inventory };

@@ -1,86 +1,126 @@
-import {
-  Model,
-  DataTypes,
-  InferAttributes,
-  InferCreationAttributes,
-  CreationOptional,
-  ForeignKey,
-} from "sequelize";
+import { DataTypes, Model, Optional } from "sequelize";
 import { getSequelize } from "@/lib/sequelize";
-import { Business } from "./Business";
+import type { Business } from "./Business";
+import type { Shop } from "./Shop";
 
-export type UserRole = "owner" | "staff";
+interface UserAttributes {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone?: string;
+  emailVerifiedAt?: Date;
+  avatar?: string;
+  password?: string; // Made optional for invitation flow
+  isActive: boolean;
+  isAdmin: boolean;
+  businessId?: string;
+  shopId?: string;
+  invitationToken?: string;
+  invitationSentAt?: Date;
+  invitationAcceptedAt?: Date;
+  invitedBy?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt?: Date | null;
+  business?: Business;
+  shop?: Shop;
+}
 
-export class User extends Model<
-  InferAttributes<User>,
-  InferCreationAttributes<User>
-> {
-  declare id: CreationOptional<number>;
-  declare email: string;
-  declare password: string;
+type UserCreationAttributes = Optional<
+  UserAttributes,
+  | "id"
+  | "phone"
+  | "emailVerifiedAt"
+  | "avatar"
+  | "password"
+  | "businessId"
+  | "shopId"
+  | "invitationToken"
+  | "invitationSentAt"
+  | "invitationAcceptedAt"
+  | "invitedBy"
+  | "createdAt"
+  | "updatedAt"
+  | "deletedAt"
+>;
+
+class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
+  declare id: string;
   declare firstName: string;
   declare lastName: string;
-  declare phone: CreationOptional<string | null>;
-  declare businessId: ForeignKey<Business["id"]> | null;
-  declare role: CreationOptional<UserRole>;
-  declare signatureData: CreationOptional<string | null>; // Base64 signature image
-  declare isAdmin: CreationOptional<boolean>;
-  declare isActive: CreationOptional<boolean>;
-  declare createdAt: CreationOptional<Date>;
-  declare updatedAt: CreationOptional<Date>;
+  declare email: string;
+  declare phone?: string;
+  declare emailVerifiedAt?: Date;
+  declare avatar?: string;
+  declare password?: string;
+  declare isActive: boolean;
+  declare isAdmin: boolean;
+  declare businessId?: string;
+  declare shopId?: string;
+  declare invitationToken?: string;
+  declare invitationSentAt?: Date;
+  declare invitationAcceptedAt?: Date;
+  declare invitedBy?: string;
+  declare readonly createdAt: Date;
+  declare readonly updatedAt: Date;
+  declare readonly deletedAt?: Date | null;
+
+  // Instance methods
+  public getFullName(): string {
+    return `${this.firstName} ${this.lastName}`;
+  }
+
+  // Associations
+  declare business?: Business;
+  declare shop?: Shop;
 }
 
 User.init(
   {
     id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
+      type: DataTypes.BIGINT,
       primaryKey: true,
+      autoIncrement: true,
+    },
+    firstName: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      field: "first_name",
+    },
+    lastName: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      field: "last_name",
     },
     email: {
       type: DataTypes.STRING(255),
       allowNull: false,
       unique: true,
-      validate: {
-        isEmail: true,
-      },
+    },
+    phone: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+      unique: true,
+    },
+    emailVerifiedAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      field: "email_verified_at",
+    },
+    avatar: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
     },
     password: {
       type: DataTypes.STRING(255),
+      allowNull: true, // Nullable for invitation flow
+    },
+    isActive: {
+      type: DataTypes.BOOLEAN,
       allowNull: false,
-    },
-    firstName: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-      field: "first_name",
-    },
-    lastName: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-      field: "last_name",
-    },
-    phone: {
-      type: DataTypes.STRING(50),
-      allowNull: true,
-    },
-    businessId: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      field: "business_id",
-      references: {
-        model: "businesses",
-        key: "id",
-      },
-    },
-    role: {
-      type: DataTypes.ENUM("owner", "staff"),
-      allowNull: false,
-      defaultValue: "staff",
-    },
-    signatureData: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-      field: "signature_data",
+      defaultValue: true,
+      field: "is_active",
     },
     isAdmin: {
       type: DataTypes.BOOLEAN,
@@ -88,25 +128,64 @@ User.init(
       defaultValue: false,
       field: "is_admin",
     },
-    isActive: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false, // Changed to false - requires admin approval
-      field: "is_active",
+    businessId: {
+      type: DataTypes.BIGINT,
+      allowNull: true,
+      field: "business_id",
+    },
+    shopId: {
+      type: DataTypes.BIGINT,
+      allowNull: true,
+      field: "shop_id",
+    },
+    invitationToken: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+      field: "invitation_token",
+    },
+    invitationSentAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      field: "invitation_sent_at",
+    },
+    invitationAcceptedAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      field: "invitation_accepted_at",
+    },
+    invitedBy: {
+      type: DataTypes.BIGINT,
+      allowNull: true,
+      field: "invited_by",
     },
     createdAt: {
       type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
       field: "created_at",
     },
     updatedAt: {
       type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
       field: "updated_at",
+    },
+    deletedAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      field: "deleted_at",
     },
   },
   {
     sequelize: getSequelize(),
     tableName: "users",
-    underscored: true,
     timestamps: true,
-  }
+    paranoid: true,
+    createdAt: "createdAt",
+    updatedAt: "updatedAt",
+    deletedAt: "deletedAt",
+  },
 );
+
+export { User };
+export type { UserAttributes };

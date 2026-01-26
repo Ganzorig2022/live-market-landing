@@ -1,77 +1,86 @@
-import {
-  Model,
-  DataTypes,
-  InferAttributes,
-  InferCreationAttributes,
-  CreationOptional,
-} from "sequelize";
+import { DataTypes, Model, Optional } from "sequelize";
 import { getSequelize } from "@/lib/sequelize";
+import type { Product } from "./Product";
+import type { Order } from "./Order";
+import type { Bank } from "./Bank";
+import { ShopAttributes } from "@/models/Shop";
 
-export class Business extends Model<
-  InferAttributes<Business>,
-  InferCreationAttributes<Business>
-> {
-  declare id: CreationOptional<number>;
+export interface BusinessAttributes {
+  id: string;
+  name: string;
+  email: string;
+  status: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt?: Date | null;
+  shops?: ShopAttributes[];
+}
+
+type BusinessCreationAttributes = Optional<BusinessAttributes, "id" | "createdAt" | "updatedAt" | "deletedAt">;
+
+class Business extends Model<BusinessAttributes, BusinessCreationAttributes> implements BusinessAttributes {
+  declare id: string;
   declare name: string;
-  declare registrationNumber: string;
   declare email: string;
-  declare phone: string;
-  declare address: string;
-  declare isActive: CreationOptional<boolean>;
-  declare createdAt: CreationOptional<Date>;
-  declare updatedAt: CreationOptional<Date>;
+  declare status: boolean;
+  declare readonly createdAt: Date;
+  declare readonly updatedAt: Date;
+  declare readonly deletedAt?: Date | null;
+
+  // Associations will be defined in index.ts
+  public shops?: ShopAttributes[];
+  public products?: Product[];
+  public orders?: Order[];
+  public banks?: Bank[];
 }
 
 Business.init(
   {
     id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
+      type: DataTypes.BIGINT,
       primaryKey: true,
+      autoIncrement: true,
     },
     name: {
       type: DataTypes.STRING(255),
       allowNull: false,
     },
-    registrationNumber: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-      field: "registration_number",
-    },
     email: {
       type: DataTypes.STRING(255),
       allowNull: false,
-      validate: {
-        isEmail: true,
-      },
     },
-    phone: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
-    },
-    address: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-    },
-    isActive: {
+    status: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false,
-      field: "is_active",
+      defaultValue: true,
     },
     createdAt: {
       type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
       field: "created_at",
     },
     updatedAt: {
       type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
       field: "updated_at",
+    },
+    deletedAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      field: "deleted_at",
     },
   },
   {
     sequelize: getSequelize(),
     tableName: "businesses",
-    underscored: true,
     timestamps: true,
+    paranoid: true,
+    createdAt: "createdAt",
+    updatedAt: "updatedAt",
+    deletedAt: "deletedAt",
   }
 );
+
+export { Business };

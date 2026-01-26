@@ -5,39 +5,34 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  
-  /* Custom brand colors */
+
+  /* Custom brand colors - Light theme inspired by modern e-commerce */
   --color-primary: #6366F1;
   --color-primary-hover: #4F46E5;
-  --color-primary-light: #EEF2FF;
-  --color-secondary: #F97316;
-  --color-secondary-hover: #EA580C;
+  --color-primary-light: #F0F0FF;
+  --color-secondary: #EC4899;
+  --color-secondary-hover: #DB2777;
   --color-accent: #8B5CF6;
+  --color-deep-purple: #1E0E62;
+  --color-deep-purple-hover: #160A4D;
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #1F2937;
+  /* Light theme only - inspired by etail.me */
+  --background: #F9FAFB;
+  --foreground: #2D3748;
   --muted: #F3F4F6;
   --muted-foreground: #6B7280;
   --border: #E5E7EB;
   --primary: #6366F1;
   --primary-foreground: #ffffff;
-  --secondary: #F97316;
+  --secondary: #EC4899;
   --secondary-foreground: #ffffff;
   --accent: #8B5CF6;
+  --deep-purple: #1E0E62;
+  --deep-purple-hover: #160A4D;
   --destructive: #EF4444;
   --ring: #6366F1;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0F172A;
-    --foreground: #F1F5F9;
-    --muted: #1E293B;
-    --muted-foreground: #94A3B8;
-    --border: #334155;
-  }
 }
 
 * {
@@ -48,6 +43,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Custom scrollbar */
@@ -69,17 +66,23 @@ body {
   background: var(--foreground);
 }
 
-/* Gradient text utility */
+/* Gradient text utility - softer version */
 .gradient-text {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  background: linear-gradient(135deg, var(--deep-purple) 0%, var(--primary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Gradient background utility */
-.gradient-bg {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+/* Deep purple button background */
+.btn-deep-purple {
+  background: var(--deep-purple);
+  color: white;
+  transition: background 0.2s ease;
+}
+
+.btn-deep-purple:hover {
+  background: var(--deep-purple-hover);
 }
 
 /* Animation utilities */
