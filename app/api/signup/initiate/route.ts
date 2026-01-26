@@ -9,8 +9,10 @@ const initiateSchema = z.object({
   lastName: z.string().min(1, "Last name is required"),
   phone: z.string().min(1, "Phone number is required"),
   businessName: z.string().min(1, "Business name is required"),
-  businessRegNumber: z.string().min(1, "Business registration number is required"),
-  businessAddress: z.string().min(1, "Business address is required"),
+  shopName: z.string().min(1, "Shop name is required"),
+  numberOfEmployees: z.number().int().positive().nullable(),
+  hasMultipleShops: z.boolean(),
+  hasMultipleWarehouses: z.boolean(),
 });
 
 export async function POST(req: NextRequest) {

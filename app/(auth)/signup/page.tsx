@@ -8,9 +8,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { SignupStepper } from "@/components/auth/SignupStepper";
-import { 
-  User, Mail, Lock, Phone, Building2, FileText, MapPin, 
-  Loader2, AlertCircle, ArrowRight 
+import {
+  User, Mail, Lock, Phone, Building2, Store, Users,
+  Loader2, AlertCircle, ArrowRight
 } from "lucide-react";
 
 export default function SignupPage() {
@@ -26,14 +26,31 @@ export default function SignupPage() {
     password: "",
     confirmPassword: "",
     businessName: "",
-    businessRegNumber: "",
-    businessAddress: "",
+    shopName: "",
+    numberOfEmployees: null as number | null,
+    hasMultipleShops: false,
+    hasMultipleWarehouses: false,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.checked,
+    }));
+  };
+
+  const handleNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value === "" ? null : parseInt(e.target.value, 10);
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: value,
     }));
   };
 
@@ -66,8 +83,10 @@ export default function SignupPage() {
           lastName: formData.lastName,
           phone: formData.phone,
           businessName: formData.businessName,
-          businessRegNumber: formData.businessRegNumber,
-          businessAddress: formData.businessAddress,
+          shopName: formData.shopName,
+          numberOfEmployees: formData.numberOfEmployees,
+          hasMultipleShops: formData.hasMultipleShops,
+          hasMultipleWarehouses: formData.hasMultipleWarehouses,
         }),
       });
 
@@ -231,7 +250,7 @@ export default function SignupPage() {
             {/* Business Information */}
             <div className="space-y-4 pt-4 border-t border-border">
               <h3 className="text-sm font-medium text-muted-foreground">Business Information</h3>
-              
+
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="businessName">Business Name</Label>
@@ -251,14 +270,14 @@ export default function SignupPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="businessRegNumber">Registration Number</Label>
+                  <Label htmlFor="shopName">Shop Name</Label>
                   <div className="relative">
-                    <FileText className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                    <Store className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     <Input
-                      id="businessRegNumber"
-                      name="businessRegNumber"
-                      placeholder="REG-123456"
-                      value={formData.businessRegNumber}
+                      id="shopName"
+                      name="shopName"
+                      placeholder="Acme Store"
+                      value={formData.shopName}
                       onChange={handleChange}
                       className="pl-10"
                       required
@@ -269,19 +288,62 @@ export default function SignupPage() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="businessAddress">Business Address</Label>
+                <Label htmlFor="numberOfEmployees">Number of Employees (Optional)</Label>
                 <div className="relative">
-                  <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <textarea
-                    id="businessAddress"
-                    name="businessAddress"
-                    placeholder="123 Main St, City, State, ZIP"
-                    value={formData.businessAddress}
-                    onChange={handleChange}
-                    className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 pl-10 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    required
+                  <Users className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input
+                    id="numberOfEmployees"
+                    name="numberOfEmployees"
+                    type="number"
+                    min="1"
+                    placeholder="e.g., 10"
+                    value={formData.numberOfEmployees ?? ""}
+                    onChange={handleNumberChange}
+                    className="pl-10"
                     disabled={loading}
                   />
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <div className="flex items-start space-x-3">
+                  <input
+                    type="checkbox"
+                    id="hasMultipleShops"
+                    name="hasMultipleShops"
+                    checked={formData.hasMultipleShops}
+                    onChange={handleCheckboxChange}
+                    disabled={loading}
+                    className="mt-1 h-4 w-4 rounded border-input bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  />
+                  <div className="space-y-1">
+                    <Label htmlFor="hasMultipleShops" className="cursor-pointer">
+                      I have multiple shops/locations
+                    </Label>
+                    <p className="text-xs text-muted-foreground">
+                      Check this if you operate more than one physical store location
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-3">
+                  <input
+                    type="checkbox"
+                    id="hasMultipleWarehouses"
+                    name="hasMultipleWarehouses"
+                    checked={formData.hasMultipleWarehouses}
+                    onChange={handleCheckboxChange}
+                    disabled={loading}
+                    className="mt-1 h-4 w-4 rounded border-input bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  />
+                  <div className="space-y-1">
+                    <Label htmlFor="hasMultipleWarehouses" className="cursor-pointer">
+                      I have multiple warehouses
+                    </Label>
+                    <p className="text-xs text-muted-foreground">
+                      Check this if you operate more than one warehouse/storage facility
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
