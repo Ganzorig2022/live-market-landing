@@ -60,13 +60,13 @@ export default function SignupPage() {
 
     // Validate passwords match
     if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match");
+      setError("Нууц үг таарахгүй байна");
       return;
     }
 
     // Validate password length
     if (formData.password.length < 8) {
-      setError("Password must be at least 8 characters");
+      setError("Нууц үг хамгийн багадаа 8 тэмдэгт байх ёстой");
       return;
     }
 
@@ -96,10 +96,10 @@ export default function SignupPage() {
         // Redirect to OTP verification
         router.push(`/signup/verify?id=${data.registrationId}`);
       } else {
-        setError(data.error || "Something went wrong");
+        setError(data.error || "Алдаа гарлаа");
       }
     } catch {
-      setError("An error occurred. Please try again.");
+      setError("Алдаа гарлаа. Дахин оролдоно уу.");
     } finally {
       setLoading(false);
     }
@@ -114,9 +114,9 @@ export default function SignupPage() {
 
       <Card className="border-border/50 shadow-lg">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">Create your account</CardTitle>
+          <CardTitle className="text-2xl font-bold">Бүртгэл үүсгэх</CardTitle>
           <CardDescription>
-            Tell us about yourself and your business
+            Өөрийнхөө болон бизнесийнхээ тухай мэдээлэл оруулна уу
           </CardDescription>
         </CardHeader>
 
@@ -131,11 +131,11 @@ export default function SignupPage() {
 
             {/* Personal Information */}
             <div className="space-y-4">
-              <h3 className="text-sm font-medium text-muted-foreground">Personal Information</h3>
+              <h3 className="text-sm font-medium text-muted-foreground">Хувийн мэдээлэл</h3>
               
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="firstName">First Name</Label>
+                  <Label htmlFor="firstName">Нэр</Label>
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     <Input
@@ -152,7 +152,7 @@ export default function SignupPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="lastName">Last Name</Label>
+                  <Label htmlFor="lastName">Овог</Label>
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     <Input
@@ -171,7 +171,7 @@ export default function SignupPage() {
 
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email">Имэйл</Label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     <Input
@@ -189,7 +189,7 @@ export default function SignupPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="phone">Phone</Label>
+                  <Label htmlFor="phone">Утас</Label>
                   <div className="relative">
                     <Phone className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     <Input
@@ -209,7 +209,7 @@ export default function SignupPage() {
 
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password">Нууц үг</Label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     <Input
@@ -228,7 +228,7 @@ export default function SignupPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="confirmPassword">Confirm Password</Label>
+                  <Label htmlFor="confirmPassword">Нууц үг давтах</Label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     <Input
@@ -249,11 +249,11 @@ export default function SignupPage() {
 
             {/* Business Information */}
             <div className="space-y-4 pt-4 border-t border-border">
-              <h3 className="text-sm font-medium text-muted-foreground">Business Information</h3>
+              <h3 className="text-sm font-medium text-muted-foreground">Бизнесийн мэдээлэл</h3>
 
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="businessName">Business Name</Label>
+                  <Label htmlFor="businessName">Бизнесийн нэр</Label>
                   <div className="relative">
                     <Building2 className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     <Input
@@ -270,7 +270,7 @@ export default function SignupPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="shopName">Shop Name</Label>
+                  <Label htmlFor="shopName">Дэлгүүрийн нэр</Label>
                   <div className="relative">
                     <Store className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     <Input
@@ -288,7 +288,7 @@ export default function SignupPage() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="numberOfEmployees">Number of Employees (Optional)</Label>
+                <Label htmlFor="numberOfEmployees">Ажилтны тоо (Сонголттой)</Label>
                 <div className="relative">
                   <Users className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                   <Input
@@ -318,10 +318,10 @@ export default function SignupPage() {
                   />
                   <div className="space-y-1">
                     <Label htmlFor="hasMultipleShops" className="cursor-pointer">
-                      I have multiple shops/locations
+                      Надад олон дэлгүүр/салбар байгаа
                     </Label>
                     <p className="text-xs text-muted-foreground">
-                      Check this if you operate more than one physical store location
+                      Хэрэв та нэгээс олон салбар дэлгүүртэй бол сонгоно уу
                     </p>
                   </div>
                 </div>
@@ -338,10 +338,10 @@ export default function SignupPage() {
                   />
                   <div className="space-y-1">
                     <Label htmlFor="hasMultipleWarehouses" className="cursor-pointer">
-                      I have multiple warehouses
+                      Надад олон агуулах байгаа
                     </Label>
                     <p className="text-xs text-muted-foreground">
-                      Check this if you operate more than one warehouse/storage facility
+                      Хэрэв та нэгээс олон агуулахтай бол сонгоно уу
                     </p>
                   </div>
                 </div>
@@ -358,20 +358,20 @@ export default function SignupPage() {
               {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Processing...
+                  Боловсруулж байна...
                 </>
               ) : (
                 <>
-                  Continue
+                  Үргэлжлүүлэх
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </>
               )}
             </Button>
 
             <p className="text-center text-sm text-muted-foreground">
-              Already have an account?{" "}
+              Бүртгэлтэй юу?{" "}
               <Link href="/login" className="font-medium text-primary hover:underline">
-                Sign in
+                Нэвтрэх
               </Link>
             </p>
           </CardFooter>

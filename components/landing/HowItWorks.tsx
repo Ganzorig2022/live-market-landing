@@ -4,8 +4,8 @@ const steps = [
   {
     step: 1,
     icon: UserPlus,
-    title: "Sign Up",
-    description: "Create your business account in minutes. Tell us about your shop and verify your email.",
+    title: "Бүртгүүлэх",
+    description: "Хэдхэн минутад бизнесийн бүртгэлээ үүсгээрэй. Дэлгүүрийнхээ тухай хэлж, имэйлээ баталгаажуулна уу.",
     color: "text-primary",
     borderColor: "border-primary",
     bgColor: "bg-primary",
@@ -13,8 +13,8 @@ const steps = [
   {
     step: 2,
     icon: ClipboardCheck,
-    title: "Get Approved",
-    description: "Our team reviews your application. Once approved, you'll receive login credentials via email.",
+    title: "Баталгаажуулах",
+    description: "Манай баг таны өргөдлийг хянана. Баталгаажсаны дараа та имэйлээр нэвтрэх мэдээллийг хүлээн авна.",
     color: "text-secondary",
     borderColor: "border-secondary",
     bgColor: "bg-secondary",
@@ -22,8 +22,8 @@ const steps = [
   {
     step: 3,
     icon: Rocket,
-    title: "Start Selling",
-    description: "Set up your products, go live, and start selling to your audience. It's that simple!",
+    title: "Худалдаа эхлүүлэх",
+    description: "Бүтээгдэхүүнээ тохируулж, шууд нэвтрүүлэг хийж, үзэгчдэдээ худалдаж эхлээрэй. Ийм л амархан!",
     color: "text-accent",
     borderColor: "border-accent",
     bgColor: "bg-accent",
@@ -37,11 +37,11 @@ export function HowItWorks() {
         {/* Section Header */}
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-[#1E0E62] sm:text-4xl">
-            Get started in{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">3 easy steps</span>
+            Эхлэхэд{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">3 хялбар алхам</span>
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Join thousands of sellers who are already growing their business with Live Market.
+            Live Market-ээр бизнесээ аль хэдийн өсгөж буй мянга мянган худалдагчидтай нэгдээрэй.
           </p>
         </div>
 

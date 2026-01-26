@@ -15,13 +15,13 @@ export default function RegistrationCompletePage() {
 
           {/* Title */}
           <h1 className="text-center text-2xl font-bold text-foreground">
-            Registration Submitted!
+            Бүртгэл амжилттай илгээгдлээ!
           </h1>
 
           {/* Description */}
           <p className="mt-4 text-center text-muted-foreground">
-            Thank you for registering with Live Market. Your application has been 
-            submitted successfully and is now pending review.
+            Live Market-д бүртгүүлсэнд баярлалаа. Таны өргөдөл амжилттай илгээгдсэн бөгөөд
+            одоо хянагдаж байна.
           </p>
 
           {/* Info Cards */}
@@ -31,10 +31,10 @@ export default function RegistrationCompletePage() {
                 <Clock className="h-5 w-5 text-primary" />
               </div>
               <div>
-                <h3 className="font-medium text-foreground">What happens next?</h3>
+                <h3 className="font-medium text-foreground">Дараа нь юу болох вэ?</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Our admin team will review your application. This usually takes 
-                  24-48 hours during business days.
+                  Манай админ баг таны өргөдлийг хянана. Энэ нь ажлын өдрүүдэд
+                  ихэвчлэн 24-48 цаг болдог.
                 </p>
               </div>
             </div>
@@ -44,10 +44,10 @@ export default function RegistrationCompletePage() {
                 <Mail className="h-5 w-5 text-secondary" />
               </div>
               <div>
-                <h3 className="font-medium text-foreground">Check your email</h3>
+                <h3 className="font-medium text-foreground">Имэйлээ шалгана уу</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Once your account is approved, you'll receive an email with your 
-                  login credentials and instructions to get started.
+                  Таны бүртгэл баталгаажсаны дараа та нэвтрэх мэдээлэл болон
+                  эхлэх зааврыг имэйлээр хүлээн авна.
                 </p>
               </div>
             </div>
@@ -56,8 +56,8 @@ export default function RegistrationCompletePage() {
           {/* Important Note */}
           <div className="mt-6 rounded-lg bg-amber-50 border border-amber-200 p-4">
             <p className="text-sm text-amber-800">
-              <strong>Note:</strong> Your account will remain inactive until approved. 
-              You won't be able to log in until you receive the approval email.
+              <strong>Анхаар:</strong> Таны бүртгэл баталгаажих хүртэл идэвхгүй байх болно.
+              Та баталгаажуулах имэйл хүлээн авах хүртэл нэвтрэх боломжгүй.
             </p>
           </div>
 
@@ -66,12 +66,12 @@ export default function RegistrationCompletePage() {
             <Button asChild className="w-full gradient-bg hover:opacity-90">
               <Link href="/">
                 <Home className="mr-2 h-4 w-4" />
-                Back to Home
+                Нүүр хуудас руу буцах
               </Link>
             </Button>
             <Button asChild variant="outline" className="w-full">
               <Link href="/login">
-                Go to Login
+                Нэвтрэх хуудас руу
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
@@ -79,7 +79,7 @@ export default function RegistrationCompletePage() {
 
           {/* Footer */}
           <p className="mt-8 text-center text-xs text-muted-foreground">
-            Questions? Contact us at{" "}
+            Асуулт байна уу? Бидэнтэй холбогдоорой{" "}
             <a href="mailto:support@livemarket.com" className="text-primary hover:underline">
               support@livemarket.com
             </a>

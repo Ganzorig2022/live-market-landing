@@ -8,9 +8,9 @@ interface Step {
 }
 
 const steps: Step[] = [
-  { number: 1, title: "Organization", description: "Business details" },
-  { number: 2, title: "Verification", description: "Email OTP" },
-  { number: 3, title: "Agreement", description: "Terms & Signature" },
+  { number: 1, title: "Байгууллага", description: "Бизнесийн мэдээлэл" },
+  { number: 2, title: "Баталгаажуулалт", description: "Имэйл OTP" },
+  { number: 3, title: "Гэрээ", description: "Нөхцөл & Гарын үсэг" },
 ];
 
 interface SignupStepperProps {

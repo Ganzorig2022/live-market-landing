@@ -29,7 +29,7 @@ export default function AuthLayout({
       <footer className="border-t border-border py-6">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Live Market. All rights reserved.
+            © {new Date().getFullYear()} Live Market. Бүх эрх хуулиар хамгаалагдсан.
           </p>
         </div>
       </footer>

@@ -18,17 +18,17 @@ export function Hero() {
             {/* Badge */}
             <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-purple-100 px-4 py-1.5 text-sm font-medium text-purple-700">
               <Sparkles className="h-4 w-4" />
-              <span>The Future of Live Commerce</span>
+              <span>Шууд худалдааны ирээдүй</span>
             </div>
 
             {/* Headline */}
             <h1 className="text-4xl font-bold tracking-tight text-[#1E0E62] sm:text-5xl lg:text-6xl leading-tight">
-              Register your store name now!
+              Дэлгүүрийнхээ нэрийг одоо бүртгүүлээрэй!
             </h1>
 
             {/* Subheadline */}
             <p className="mt-6 text-lg leading-relaxed text-[#6B7280] sm:text-xl max-w-xl">
-              With Live Market, anyone can earn their first dollar online. Just start with what you know. It's that easy.
+              Live Market-ээр хэн ч онлайнаар анхны орлогоо олох боломжтой. Зүгээр л мэддэг зүйлээсээ эхлээрэй. Ийм л амархан.
             </p>
 
             {/* CTA Buttons */}
@@ -38,7 +38,7 @@ export function Hero() {
                 asChild
                 className="w-full sm:w-auto bg-[#1E0E62] hover:bg-[#160A4D] text-white rounded-full px-8"
               >
-                <Link href="/signup">Start selling</Link>
+                <Link href="/signup">Худалдаа эхлүүлэх</Link>
               </Button>
               <Button
                 size="lg"
@@ -46,7 +46,7 @@ export function Hero() {
                 asChild
                 className="w-full sm:w-auto rounded-full px-8"
               >
-                <Link href="https://lm-admin.lvg.mn/login">Login</Link>
+                <Link href="https://lm-admin.lvg.mn/login">Нэвтрэх</Link>
               </Button>
             </div>
 
@@ -56,19 +56,19 @@ export function Hero() {
                 <div className="flex items-center gap-2">
                   <span className="text-2xl font-bold text-[#1E0E62]">10K+</span>
                 </div>
-                <p className="text-sm text-muted-foreground">Active Sellers</p>
+                <p className="text-sm text-muted-foreground">Идэвхтэй худалдагч</p>
               </div>
               <div>
                 <div className="flex items-center gap-2">
                   <span className="text-2xl font-bold text-[#1E0E62]">$50M+</span>
                 </div>
-                <p className="text-sm text-muted-foreground">GMV Processed</p>
+                <p className="text-sm text-muted-foreground">Нийт борлуулалт</p>
               </div>
               <div>
                 <div className="flex items-center gap-2">
                   <span className="text-2xl font-bold text-[#1E0E62]">99.9%</span>
                 </div>
-                <p className="text-sm text-muted-foreground">Uptime</p>
+                <p className="text-sm text-muted-foreground">Ажиллагаатай байдал</p>
               </div>
             </div>
           </div>

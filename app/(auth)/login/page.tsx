@@ -31,8 +31,8 @@ export default function LoginPage() {
 
       if (result?.error) {
         // Parse error message from API response
-        setError(result.error === "CredentialsSignin" 
-          ? "Invalid email or password, or your account is pending approval."
+        setError(result.error === "CredentialsSignin"
+          ? "Имэйл эсвэл нууц үг буруу, эсвэл таны бүртгэл баталгаажуулалт хүлээж байна."
           : result.error
         );
       } else {
@@ -42,7 +42,7 @@ export default function LoginPage() {
         router.refresh();
       }
     } catch {
-      setError("An error occurred. Please try again.");
+      setError("Алдаа гарлаа. Дахин оролдоно уу.");
     } finally {
       setLoading(false);
     }
@@ -52,9 +52,9 @@ export default function LoginPage() {
     <div className="w-full max-w-md">
       <Card className="border-border/50 shadow-lg">
         <CardHeader className="space-y-1 text-center">
-          <CardTitle className="text-2xl font-bold">Welcome back</CardTitle>
+          <CardTitle className="text-2xl font-bold">Тавтай морил</CardTitle>
           <CardDescription>
-            Sign in to your Live Market account
+            Live Market бүртгэлдээ нэвтрэх
           </CardDescription>
         </CardHeader>
 
@@ -68,7 +68,7 @@ export default function LoginPage() {
             )}
 
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">Имэйл</Label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
@@ -85,7 +85,7 @@ export default function LoginPage() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">Нууц үг</Label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
@@ -106,7 +106,7 @@ export default function LoginPage() {
                 href="/forgot-password"
                 className="text-sm text-primary hover:underline"
               >
-                Forgot password?
+                Нууц үгээ мартсан уу?
               </Link>
             </div>
           </CardContent>
@@ -120,17 +120,17 @@ export default function LoginPage() {
               {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Signing in...
+                  Нэвтэрч байна...
                 </>
               ) : (
-                "Sign In"
+                "Нэвтрэх"
               )}
             </Button>
 
             <p className="text-center text-sm text-muted-foreground">
-              Don't have an account?{" "}
+              Бүртгэлгүй юу?{" "}
               <Link href="/signup" className="font-medium text-primary hover:underline">
-                Sign up
+                Бүртгүүлэх
               </Link>
             </p>
           </CardFooter>

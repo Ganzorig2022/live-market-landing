@@ -3,43 +3,43 @@ import { Video, Package, ShoppingCart, BarChart3, Shield, Zap } from "lucide-rea
 const features = [
   {
     icon: Video,
-    title: "Live Streaming Sales",
-    description: "Go live and sell directly to your audience. Engage customers in real-time with interactive features.",
+    title: "Шууд дамжуулалтаар борлуулах",
+    description: "Шууд нэвтрүүлэг хийж, үзэгчдэдээ шууд худалдана уу. Интерактив боломжуудаар хэрэглэгчидтэй бодит цагт харилцана.",
     color: "text-primary",
     bgColor: "bg-primary/10",
   },
   {
     icon: Package,
-    title: "Inventory Management",
-    description: "Track stock levels, manage warehouses, and never oversell with real-time inventory sync.",
+    title: "Бараа материалын удирдлага",
+    description: "Нөөцийн түвшинг хянаж, агуулахуудыг удирдаж, бодит цагийн синхрончлолоор хэзээ ч илүү борлуулахгүй.",
     color: "text-secondary",
     bgColor: "bg-secondary/10",
   },
   {
     icon: ShoppingCart,
-    title: "Order Processing",
-    description: "Seamless order management from live stream to delivery. Automated workflows save you time.",
+    title: "Захиалга боловсруулалт",
+    description: "Шууд дамжуулалтаас хүргэлт хүртэлх захиалгын саадгүй удирдлага. Автомат ажлын урсгал нь таны цагийг хэмнэнэ.",
     color: "text-accent",
     bgColor: "bg-accent/10",
   },
   {
     icon: BarChart3,
-    title: "Analytics Dashboard",
-    description: "Understand your business with detailed insights on sales, viewers, and conversion rates.",
+    title: "Аналитик самбар",
+    description: "Борлуулалт, үзэгчид, хөрвүүлэлтийн хувь хэмжээний талаарх дэлгэрэнгүй мэдээллээр бизнесээ ойлгоорой.",
     color: "text-emerald-500",
     bgColor: "bg-emerald-500/10",
   },
   {
     icon: Shield,
-    title: "Secure Payments",
-    description: "Multiple payment options with fraud protection. Your money is safe with us.",
+    title: "Найдвартай төлбөр",
+    description: "Луйврын хамгаалалттай олон төлбөрийн сонголт. Таны мөнгө биднийг хамт аюулгүй.",
     color: "text-blue-500",
     bgColor: "bg-blue-500/10",
   },
   {
     icon: Zap,
-    title: "Fast & Reliable",
-    description: "Built for speed and scale. Handle thousands of concurrent viewers without breaking a sweat.",
+    title: "Хурдан & Найдвартай",
+    description: "Хурд болон цар хүрээнд зориулсан. Мянга мянган зэрэгцээ үзэгчдийг хялбархан зохицуулна.",
     color: "text-amber-500",
     bgColor: "bg-amber-500/10",
   },
@@ -52,12 +52,12 @@ export function Features() {
         {/* Section Header */}
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-[#1E0E62] sm:text-4xl">
-            Everything you need to{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">sell live</span>
+            Шууд худалдаа хийхэд{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">хэрэгтэй бүх зүйл</span>
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Powerful features designed for modern live commerce sellers.
-            From streaming to shipping, we've got you covered.
+            Орчин үеийн шууд худалдааны худалдагчдад зориулсан хүчирхэг боломжууд.
+            Нэвтрүүлгээс хүргэлт хүртэл бүгдийг бид хариуцна.
           </p>
         </div>
 

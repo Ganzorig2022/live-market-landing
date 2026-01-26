@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 import { getRegistrationStatus } from "@/services/registration.service";
+
+const statusSchema = z.object({
+  id: z.string().uuid("Invalid registration ID format"),
+});
 
 export async function GET(req: NextRequest) {
   try {
@@ -8,6 +13,15 @@ export async function GET(req: NextRequest) {
 
     if (!registrationId) {
       return NextResponse.json({ error: "Registration ID is required" }, { status: 400 });
+    }
+
+    // Validate UUID format
+    const validation = statusSchema.safeParse({ id: registrationId });
+    if (!validation.success) {
+      return NextResponse.json(
+        { error: validation.error.errors[0].message },
+        { status: 400 }
+      );
     }
 
     const result = await getRegistrationStatus(registrationId);

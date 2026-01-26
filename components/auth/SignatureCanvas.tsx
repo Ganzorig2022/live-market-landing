@@ -79,7 +79,7 @@ export function SignatureCanvas({ onSignatureChange, className }: SignatureCanva
         {/* Placeholder text */}
         {isEmpty && (
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <p className="text-muted-foreground text-sm">Sign here</p>
+            <p className="text-muted-foreground text-sm">Энд гарын үсэг зурна уу</p>
           </div>
         )}
 
@@ -87,7 +87,7 @@ export function SignatureCanvas({ onSignatureChange, className }: SignatureCanva
         {!isEmpty && (
           <div className="absolute top-2 right-2 flex items-center gap-1 rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-700">
             <Check className="h-3 w-3" />
-            Signed
+            Гарын үсэг зурсан
           </div>
         )}
       </div>
@@ -102,7 +102,7 @@ export function SignatureCanvas({ onSignatureChange, className }: SignatureCanva
           disabled={isEmpty}
         >
           <Eraser className="mr-2 h-4 w-4" />
-          Clear
+          Арилгах
         </Button>
       </div>
     </div>

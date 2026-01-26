@@ -9,49 +9,49 @@ import { SignatureCanvas } from "@/components/auth/SignatureCanvas";
 import { Loader2, AlertCircle, CheckCircle2, FileText, ScrollText } from "lucide-react";
 
 const termsContent = `
-TERMS AND CONDITIONS
+ҮЙЛЧИЛГЭЭНИЙ НӨХЦӨЛ
 
-1. ACCEPTANCE OF TERMS
-By registering for and using Live Market, you agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use our services.
+1. НӨХЦЛИЙГ ХҮЛЭЭН ЗӨВШӨӨРӨХ
+Live Market-д бүртгүүлж, ашигласнаар та эдгээр Үйлчилгээний Нөхцлийг дагаж мөрдөхийг зөвшөөрч байна. Хэрэв та эдгээр нөхцлийг хүлээн зөвшөөрөхгүй бол манай үйлчилгээг бүү ашиглана уу.
 
-2. ACCOUNT REGISTRATION
-- You must provide accurate and complete information during registration
-- You are responsible for maintaining the confidentiality of your account credentials
-- You must be at least 18 years old to create an account
-- Each business may only have one account
+2. БҮРТГЭЛ ҮҮСГЭХ
+- Та бүртгүүлэхдээ үнэн зөв, бүрэн мэдээлэл өгөх ёстой
+- Та өөрийн бүртгэлийн нэвтрэх мэдээллийг нууцлах үүрэгтэй
+- Бүртгэл үүсгэхэд 18-аас дээш насны байх ёстой
+- Бизнес бүр зөвхөн нэг бүртгэлтэй байж болно
 
-3. SELLER OBLIGATIONS
-- You agree to provide accurate product descriptions and pricing
-- You are responsible for fulfilling orders in a timely manner
-- You must comply with all applicable laws and regulations
-- You agree to handle customer disputes professionally
+3. ХУДАЛДАГЧИЙН ҮҮРЭГ
+- Та бүтээгдэхүүний тодорхойлолт, үнийг үнэн зөв оруулахыг зөвшөөрч байна
+- Та захиалгыг цаг тухайд нь биелүүлэх үүрэгтэй
+- Та холбогдох хууль тогтоомжийг дагаж мөрдөх ёстой
+- Та хэрэглэгчийн гомдлыг мэргэжлийн түвшинд шийдвэрлэхийг зөвшөөрч байна
 
-4. PLATFORM USAGE
-- Live Market reserves the right to suspend or terminate accounts that violate these terms
-- You may not use the platform for illegal activities
-- You agree not to interfere with the platform's operation
+4. ПЛАТФОРМЫГ АШИГЛАХ
+- Live Market эдгээр нөхцлийг зөрчсөн бүртгэлийг түр түдгэлзүүлэх эсвэл цуцлах эрхтэй
+- Та платформыг хууль бус үйлдэлд ашиглаж болохгүй
+- Та платформын үйл ажиллагаанд саад учруулахгүй байхыг зөвшөөрч байна
 
-5. FEES AND PAYMENTS
-- Platform fees and commission rates are subject to change with notice
-- Payments will be processed according to our payment schedule
-- You are responsible for all applicable taxes
+5. ХУРААМЖ БА ТӨЛБӨР
+- Платформын хураамж, шимтгэлийн хувь нь урьдчилан мэдэгдэж өөрчлөгдөж болно
+- Төлбөрийг манай төлбөрийн хуваарийн дагуу боловсруулна
+- Та бүх холбогдох татварыг хариуцна
 
-6. INTELLECTUAL PROPERTY
-- You retain ownership of your content
-- You grant Live Market a license to display your content on the platform
-- You may not use Live Market's trademarks without permission
+6. ОЮУНЫ ӨМЧ
+- Та өөрийн контентын өмчлөгч хэвээр байна
+- Та Live Market-д өөрийн контентыг платформ дээр харуулах зөвшөөрөл олгож байна
+- Та Live Market-ын барааны тэмдгийг зөвшөөрөлгүйгээр ашиглаж болохгүй
 
-7. LIMITATION OF LIABILITY
-Live Market is not liable for indirect, incidental, or consequential damages arising from your use of the platform.
+7. ХАРИУЦЛАГЫН ХЯЗГААРЛАЛТ
+Live Market нь таны платформ ашигласнаас үүдсэн шууд бус, санамсаргүй эсвэл үр дагаварт хохирлыг хариуцахгүй.
 
-8. CHANGES TO TERMS
-We may update these terms at any time. Continued use of the platform constitutes acceptance of the updated terms.
+8. НӨХЦЛИЙН ӨӨРЧЛӨЛТ
+Бид эдгээр нөхцлийг хүссэн үедээ шинэчилж болно. Платформыг үргэлжлүүлэн ашиглах нь шинэчилсэн нөхцлийг хүлээн зөвшөөрсөнд тооцогдоно.
 
-9. GOVERNING LAW
-These terms are governed by applicable laws in your jurisdiction.
+9. ХУУЛЬ ЗҮЙН ЗОХИЦУУЛАЛТ
+Эдгээр нөхцлийг таны харьяаллын хуулиар зохицуулна.
 
-10. CONTACT
-For questions about these terms, contact us at legal@livemarket.com.
+10. ХОЛБОО БАРИХ
+Эдгээр нөхцлийн талаар асуулт байвал legal@livemarket.com хаягаар холбогдоно уу.
 `;
 
 function AgreementContent() {
@@ -78,23 +78,23 @@ function AgreementContent() {
               router.push(`/signup/verify?id=${registrationId}`);
             }
           } else {
-            setError("Registration not found. Please start over.");
+            setError("Бүртгэл олдсонгүй. Дахин эхлүүлнэ үү.");
           }
         })
         .catch(() => {
-          setError("Failed to load registration data.");
+          setError("Бүртгэлийн мэдээлэл ачаалахад алдаа гарлаа.");
         });
     }
   }, [registrationId, router]);
 
   const handleComplete = async () => {
     if (!agreed) {
-      setError("You must agree to the terms and conditions");
+      setError("Та үйлчилгээний нөхцлийг зөвшөөрөх ёстой");
       return;
     }
 
     if (!signatureData) {
-      setError("Please provide your signature");
+      setError("Гарын үсгээ зурна уу");
       return;
     }
 
@@ -117,10 +117,10 @@ function AgreementContent() {
       if (res.ok && data.success) {
         router.push("/registration-complete");
       } else {
-        setError(data.error || "Failed to complete registration");
+        setError(data.error || "Бүртгэлийг дуусгахад алдаа гарлаа");
       }
     } catch {
-      setError("An error occurred. Please try again.");
+      setError("Алдаа гарлаа. Дахин оролдоно уу.");
     } finally {
       setLoading(false);
     }
@@ -132,12 +132,12 @@ function AgreementContent() {
         <Card className="border-border/50 shadow-lg">
           <CardContent className="py-12">
             <AlertCircle className="mx-auto h-12 w-12 text-destructive" />
-            <h2 className="mt-4 text-xl font-semibold">Invalid Request</h2>
+            <h2 className="mt-4 text-xl font-semibold">Буруу хүсэлт</h2>
             <p className="mt-2 text-muted-foreground">
-              Registration ID is missing. Please start the signup process again.
+              Бүртгэлийн ID байхгүй байна. Бүртгүүлэх үйл явцыг дахин эхлүүлнэ үү.
             </p>
             <Button asChild className="mt-6">
-              <a href="/signup">Start Over</a>
+              <a href="/signup">Дахин эхлүүлэх</a>
             </Button>
           </CardContent>
         </Card>
@@ -157,12 +157,12 @@ function AgreementContent() {
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
             <FileText className="h-8 w-8 text-primary" />
           </div>
-          <CardTitle className="text-2xl font-bold">Terms & Agreement</CardTitle>
+          <CardTitle className="text-2xl font-bold">Нөхцөл & Гэрээ</CardTitle>
           <CardDescription>
-            Please review and sign to complete your registration
+            Бүртгэлээ дуусгахын тулд уншиж, гарын үсэг зурна уу
             {businessName && (
               <span className="block mt-1 font-medium text-foreground">
-                for {businessName}
+                {businessName}-д зориулсан
               </span>
             )}
           </CardDescription>
@@ -180,7 +180,7 @@ function AgreementContent() {
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
               <ScrollText className="h-4 w-4" />
-              Terms and Conditions
+              Үйлчилгээний нөхцөл
             </div>
             <div className="h-48 overflow-y-auto rounded-lg border border-border bg-muted/30 p-4">
               <pre className="whitespace-pre-wrap text-sm text-muted-foreground font-sans">
@@ -199,11 +199,11 @@ function AgreementContent() {
               disabled={loading}
             />
             <span className="text-sm">
-              I have read and agree to the{" "}
-              <span className="font-medium text-primary">Terms and Conditions</span>{" "}
-              and{" "}
-              <span className="font-medium text-primary">Privacy Policy</span>.
-              I understand that my account will be reviewed and approved by the admin team.
+              Би{" "}
+              <span className="font-medium text-primary">Үйлчилгээний нөхцөл</span>{" "}
+              болон{" "}
+              <span className="font-medium text-primary">Нууцлалын бодлого</span>-ыг уншиж, зөвшөөрч байна.
+              Миний бүртгэлийг админ баг шалгаж баталгаажуулахыг ойлгож байна.
             </span>
           </label>
 
@@ -211,7 +211,7 @@ function AgreementContent() {
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
               <FileText className="h-4 w-4" />
-              Your Signature
+              Таны гарын үсэг
             </div>
             <SignatureCanvas
               onSignatureChange={setSignatureData}
@@ -228,12 +228,12 @@ function AgreementContent() {
             {loading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Completing Registration...
+                Бүртгэлийг дуусгаж байна...
               </>
             ) : (
               <>
                 <CheckCircle2 className="mr-2 h-4 w-4" />
-                Complete Registration
+                Бүртгэлийг дуусгах
               </>
             )}
           </Button>

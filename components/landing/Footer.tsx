@@ -3,19 +3,19 @@ import { ShoppingBag, Facebook, Twitter, Instagram, Youtube } from "lucide-react
 
 const footerLinks = {
   // product: [
-  //   { href: "#features", label: "Features" },
-  //   { href: "#how-it-works", label: "How It Works" },
-  //   { href: "#faq", label: "FAQ" },
+  //   { href: "#features", label: "Боломжууд" },
+  //   { href: "#how-it-works", label: "Хэрхэн ажилладаг" },
+  //   { href: "#faq", label: "Түгээмэл асуултууд" },
   // ],
   company: [
-    { href: "/about", label: "About Us" },
-    { href: "/contact", label: "Contact" },
-    // { href: "/careers", label: "Careers" },
+    { href: "/about", label: "Бидний тухай" },
+    { href: "/contact", label: "Холбоо барих" },
+    // { href: "/careers", label: "Ажлын байр" },
   ],
   legal: [
-    { href: "/terms", label: "Terms of Service" },
-    // { href: "/privacy", label: "Privacy Policy" },
-    // { href: "/cookies", label: "Cookie Policy" },
+    { href: "/terms", label: "Үйлчилгээний нөхцөл" },
+    // { href: "/privacy", label: "Нууцлалын бодлого" },
+    // { href: "/cookies", label: "Күүкийн бодлого" },
   ],
 };
 
@@ -37,7 +37,7 @@ export function Footer() {
               <span className="text-xl font-bold text-[#1E0E62]">Live Market</span>
             </Link>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground leading-relaxed">
-              The all-in-one platform for live commerce sellers. Stream, sell, and grow your business.
+              Шууд худалдааны худалдагчдад зориулсан бүх зүйл нэг дор байх платформ. Нэвтрүүлэг хийж, худалдаж, бизнесээ өсгөөрэй.
             </p>
             {/* Social Links */}
             <div className="mt-6 flex gap-4">
@@ -56,7 +56,7 @@ export function Footer() {
 
           {/* Company Links */}
           <div>
-            <h3 className="text-sm font-semibold text-[#1E0E62]">Company</h3>
+            <h3 className="text-sm font-semibold text-[#1E0E62]">Компани</h3>
             <ul className="mt-4 space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.href}>
@@ -73,7 +73,7 @@ export function Footer() {
 
           {/* Legal Links */}
           <div>
-            <h3 className="text-sm font-semibold text-[#1E0E62]">Legal</h3>
+            <h3 className="text-sm font-semibold text-[#1E0E62]">Хууль зүй</h3>
             <ul className="mt-4 space-y-3">
               {footerLinks.legal.map((link) => (
                 <li key={link.href}>
@@ -92,7 +92,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="mt-12 border-t border-gray-200 pt-8">
           <p className="text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Live Market. All rights reserved.
+            © {new Date().getFullYear()} Live Market. Бүх эрх хуулиар хамгаалагдсан.
           </p>
         </div>
       </div>

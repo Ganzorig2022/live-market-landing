@@ -6,9 +6,9 @@ import { Menu, X, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
-  { href: "#features", label: "Features" },
-  { href: "#how-it-works", label: "How It Works" },
-  { href: "#faq", label: "FAQ" },
+  { href: "#features", label: "Боломжууд" },
+  { href: "#how-it-works", label: "Хэрхэн ажилладаг" },
+  { href: "#faq", label: "Түгээмэл асуултууд" },
 ];
 
 export function Header() {
@@ -41,7 +41,7 @@ export function Header() {
           className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-muted-foreground hover:bg-muted hover:text-foreground"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
-          <span className="sr-only">Open main menu</span>
+          <span className="sr-only">Үндсэн цэсийг нээх</span>
           {mobileMenuOpen ? (
             <X className="h-6 w-6" aria-hidden="true" />
           ) : (
@@ -66,10 +66,10 @@ export function Header() {
             ))}
             <div className="mt-4 flex flex-col gap-2 pt-4 border-t border-border">
               <Button variant="outline" asChild className="w-full rounded-full">
-                <Link href="/login">Login</Link>
+                <Link href="/login">Нэвтрэх</Link>
               </Button>
               <Button asChild className="w-full bg-[#1E0E62] hover:bg-[#160A4D] rounded-full">
-                <Link href="/signup">Start selling</Link>
+                <Link href="/signup">Худалдаа эхлүүлэх</Link>
               </Button>
             </div>
           </div>

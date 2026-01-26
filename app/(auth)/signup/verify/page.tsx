@@ -33,11 +33,11 @@ function VerifyOTPContent() {
               router.push(`/signup/agreement?id=${registrationId}`);
             }
           } else {
-            setError("Registration not found. Please start over.");
+            setError("Бүртгэл олдсонгүй. Дахин эхлүүлнэ үү.");
           }
         })
         .catch(() => {
-          setError("Failed to load registration data.");
+          setError("Бүртгэлийн мэдээлэл ачаалахад алдаа гарлаа.");
         });
     }
   }, [registrationId, router]);
@@ -86,7 +86,7 @@ function VerifyOTPContent() {
   const handleVerify = useCallback(async () => {
     const otpCode = otp.join("");
     if (otpCode.length !== 6) {
-      setError("Please enter the complete 6-digit code");
+      setError("6 оронтой кодыг бүрэн оруулна уу");
       return;
     }
 
@@ -108,12 +108,12 @@ function VerifyOTPContent() {
       if (res.ok && data.success) {
         router.push(`/signup/agreement?id=${registrationId}`);
       } else {
-        setError(data.error || "Invalid verification code");
+        setError(data.error || "Баталгаажуулах код буруу байна");
         setOtp(["", "", "", "", "", ""]);
         document.getElementById("otp-0")?.focus();
       }
     } catch {
-      setError("An error occurred. Please try again.");
+      setError("Алдаа гарлаа. Дахин оролдоно уу.");
     } finally {
       setLoading(false);
     }
@@ -136,10 +136,10 @@ function VerifyOTPContent() {
         setCooldown(60); // 60 second cooldown
         setOtp(["", "", "", "", "", ""]);
       } else {
-        setError(data.error || "Failed to resend code");
+        setError(data.error || "Код дахин илгээхэд алдаа гарлаа");
       }
     } catch {
-      setError("An error occurred. Please try again.");
+      setError("Алдаа гарлаа. Дахин оролдоно уу.");
     } finally {
       setResending(false);
     }
@@ -158,12 +158,12 @@ function VerifyOTPContent() {
         <Card className="border-border/50 shadow-lg">
           <CardContent className="py-12">
             <AlertCircle className="mx-auto h-12 w-12 text-destructive" />
-            <h2 className="mt-4 text-xl font-semibold">Invalid Request</h2>
+            <h2 className="mt-4 text-xl font-semibold">Буруу хүсэлт</h2>
             <p className="mt-2 text-muted-foreground">
-              Registration ID is missing. Please start the signup process again.
+              Бүртгэлийн ID байхгүй байна. Бүртгүүлэх үйл явцыг дахин эхлүүлнэ үү.
             </p>
             <Button asChild className="mt-6">
-              <a href="/signup">Start Over</a>
+              <a href="/signup">Дахин эхлүүлэх</a>
             </Button>
           </CardContent>
         </Card>
@@ -183,11 +183,11 @@ function VerifyOTPContent() {
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
             <Mail className="h-8 w-8 text-primary" />
           </div>
-          <CardTitle className="text-2xl font-bold">Check your email</CardTitle>
+          <CardTitle className="text-2xl font-bold">Имэйлээ шалгана уу</CardTitle>
           <CardDescription>
-            We sent a 6-digit verification code to
+            Бид 6 оронтой баталгаажуулах код илгээсэн
             <br />
-            <span className="font-medium text-foreground">{email || "your email"}</span>
+            <span className="font-medium text-foreground">{email || "таны имэйл"}</span>
           </CardDescription>
         </CardHeader>
 
@@ -219,7 +219,7 @@ function VerifyOTPContent() {
           </div>
 
           <p className="text-center text-sm text-muted-foreground">
-            Didn't receive the code?{" "}
+            Код ирээгүй юу?{" "}
             <button
               type="button"
               onClick={handleResend}
@@ -227,11 +227,11 @@ function VerifyOTPContent() {
               className="font-medium text-primary hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {resending ? (
-                "Sending..."
+                "Илгээж байна..."
               ) : cooldown > 0 ? (
-                `Resend in ${cooldown}s`
+                `${cooldown} секундын дараа дахин илгээх`
               ) : (
-                "Resend code"
+                "Дахин илгээх"
               )}
             </button>
           </p>
@@ -246,11 +246,11 @@ function VerifyOTPContent() {
             {loading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Verifying...
+                Баталгаажуулж байна...
               </>
             ) : (
               <>
-                Verify & Continue
+                Баталгаажуулах
                 <ArrowRight className="ml-2 h-4 w-4" />
               </>
             )}

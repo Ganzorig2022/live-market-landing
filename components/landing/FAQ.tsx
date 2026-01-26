@@ -6,34 +6,34 @@ import { cn } from "@/lib/utils";
 
 const faqs = [
   {
-    question: "What is Live Market?",
+    question: "Live Market гэж юу вэ?",
     answer:
-      "Live Market is an all-in-one platform for live commerce sellers. It allows you to stream live to your audience, manage products and inventory, process orders, and grow your business with powerful analytics tools.",
+      "Live Market бол шууд худалдааны худалдагчдад зориулсан бүх зүйл нэг дор байх платформ юм. Энэ нь танд үзэгчдэдээ шууд дамжуулах, бүтээгдэхүүн болон нөөцийг удирдах, захиалга боловсруулах, хүчирхэг аналитик хэрэгслээр бизнесээ өсгөх боломжийг олгоно.",
   },
   {
-    question: "How do I sign up?",
+    question: "Хэрхэн бүртгүүлэх вэ?",
     answer:
-      "Signing up is easy! Click the 'Get Started' button, fill in your business information, verify your email with an OTP code, and sign the terms agreement. Your account will be reviewed by our team.",
+      "Бүртгүүлэхэд хялбар! 'Худалдаа эхлүүлэх' товчийг дарж, бизнесийн мэдээллээ бөглөж, имэйлээ OTP кодоор баталгаажуулж, нөхцлийн гэрээнд гарын үсэг зурна уу. Таны бүртгэлийг манай баг хянана.",
   },
   {
-    question: "How long does approval take?",
+    question: "Баталгаажуулалт хэр удаан үргэлжлэх вэ?",
     answer:
-      "Most accounts are reviewed within 24-48 hours. Once approved, you'll receive an email with your login credentials and can start setting up your shop immediately.",
+      "Ихэнх бүртгэлийг 24-48 цагийн дотор хянадаг. Баталгаажсаны дараа та нэвтрэх мэдээлэл бүхий имэйл хүлээн авч, дэлгүүрээ тохируулж эхлэх боломжтой.",
   },
   {
-    question: "Is there a fee to use the platform?",
+    question: "Платформ ашиглахад төлбөртэй юу?",
     answer:
-      "We offer a free tier for small sellers to get started. As your business grows, we have affordable plans with additional features. You only pay a small commission on successful sales.",
+      "Бид жижиг худалдагчдад эхлэхэд зориулсан үнэгүй түвшин санал болгодог. Бизнес тань өсөхөд нэмэлт боломжуудтай боломжийн үнэтэй төлөвлөгөөнүүд байдаг. Та зөвхөн амжилттай борлуулалтаас бага хэмжээний шимтгэл төлнө.",
   },
   {
-    question: "What payment methods do you support?",
+    question: "Ямар төлбөрийн аргуудыг дэмждэг вэ?",
     answer:
-      "We support multiple payment methods including credit/debit cards, bank transfers, and popular digital wallets. All payments are processed securely with fraud protection.",
+      "Бид кредит/дебит карт, банкны шилжүүлэг болон алдартай дижитал түрийвч зэрэг олон төлбөрийн аргыг дэмждэг. Бүх төлбөрийг луйврын хамгаалалттай аюулгүй боловсруулдаг.",
   },
   {
-    question: "How do I contact support?",
+    question: "Тусламжийн багтай хэрхэн холбогдох вэ?",
     answer:
-      "You can reach our support team via email at support@livemarket.com or through the in-app chat. We typically respond within a few hours during business days.",
+      "Та манай тусламжийн багтай support@livemarket.com имэйлээр эсвэл апп доторх чатаар холбогдож болно. Бид ажлын өдрүүдэд хэдхэн цагийн дотор хариулдаг.",
   },
 ];
 
@@ -46,11 +46,11 @@ export function FAQ() {
         {/* Section Header */}
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-[#1E0E62] sm:text-4xl">
-            Frequently asked{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">questions</span>
+            Түгээмэл{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">асуултууд</span>
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Can't find what you're looking for? Contact our support team.
+            Хайж буй зүйлээ олохгүй байна уу? Манай тусламжийн багтай холбогдоорой.
           </p>
         </div>
 
