@@ -18,6 +18,10 @@ export class PendingRegistration extends Model<
   declare lastName: string;
   declare phone: string;
   declare businessName: string;
+  declare shopName: string;
+  declare numberOfEmployees: CreationOptional<number | null>;
+  declare hasMultipleShops: CreationOptional<boolean>;
+  declare hasMultipleWarehouses: CreationOptional<boolean>;
   declare otpCode: CreationOptional<string | null>;
   declare otpExpiresAt: CreationOptional<Date | null>;
   declare otpVerified: CreationOptional<boolean>;
@@ -65,6 +69,28 @@ PendingRegistration.init(
       type: DataTypes.STRING(255),
       allowNull: false,
       field: "business_name",
+    },
+    shopName: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      field: "shop_name",
+    },
+    numberOfEmployees: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      field: "number_of_employees",
+    },
+    hasMultipleShops: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+      field: "has_multiple_shops",
+    },
+    hasMultipleWarehouses: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+      field: "has_multiple_warehouses",
     },
     otpCode: {
       type: DataTypes.STRING(6),

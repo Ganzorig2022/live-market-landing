@@ -87,6 +87,10 @@ export async function initiateRegistration(
 			lastName: data.lastName,
 			phone: data.phone,
 			businessName: data.businessName,
+			shopName: data.shopName,
+			numberOfEmployees: data.numberOfEmployees,
+			hasMultipleShops: data.hasMultipleShops,
+			hasMultipleWarehouses: data.hasMultipleWarehouses,
 			step: 1,
 		});
 
