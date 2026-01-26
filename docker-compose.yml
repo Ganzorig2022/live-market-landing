@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:17   # or postgres:16, postgres:15, postgres:latest — 17 is current in 2026
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: landing-123456
+      POSTGRES_USER: posgtres         # optional - defaults to 'postgres'
+      POSTGRES_DB: market          # optional - creates this database automatically
+    ports:
+      - "5433:5432"                   # map to 5433 to avoid conflict with any native postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:

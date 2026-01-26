@@ -50,6 +50,7 @@ export async function loginUser(credentials: LoginCredentials): Promise<LoginRes
 
     // Check if user is active
     if (!user.isActive) {
+      console.log("❌ user.isActive: ", user.isActive)
       return {
         success: false,
         error: "Your account is pending approval. You will receive an email once approved.",
@@ -93,7 +94,7 @@ export async function loginUser(credentials: LoginCredentials): Promise<LoginRes
       token,
     };
   } catch (error) {
-    console.error("Login error:", error);
+    console.error("❌ Login error1:", error);
     return { success: false, error: "An error occurred during login" };
   }
 }

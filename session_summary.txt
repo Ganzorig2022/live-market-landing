@@ -1,0 +1,10 @@
+Session Summary for Next Chat                                                                          
+  Key Decisions Made                                                           
+  1. Fixed NextAuth circular dependency: Modified auth.ts to directly call loginUser() from services/auth.service.ts instead of fetching /api/auth/login, eliminating ECONNREFUSED errors.                                                
+  2. Created CLAUDE.md: Documented project architecture, development commands (dev server runs on port 3005), 3-step signup flow, database relationships, and common workflows for future Claude instances.                               
+  3. Clarified PendingRegistration behavior: Confirmed that PendingRegistration records being deleted after signup completion is expected behavior (line 215 in registration.service.ts). The table is temporary storage - records are    
+  cleaned up when Business, Shop, Warehouse, and User entities are successfully created.                                                                                                                                           
+  Code Patterns Established                                                                   
+  - Service layer pattern: NextAuth should call services directly, not via HTTP round-trips
+  - Transaction pattern: completeRegistration() uses Sequelize transactions to ensure atomic creation of all entities                                     
+  - Temporary data pattern: PendingRegistration is ephemeral storage for multi-step flows

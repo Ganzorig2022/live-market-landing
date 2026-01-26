@@ -39,7 +39,7 @@ Key variables:
 
 | Variable | Description |
 |----------|-------------|
-| `PGDB_NAME` | Database name (default: `live_market_landing`) |
+| `PGDB_NAME` | Database name (default: `market_landing`) |
 | `PGDB_USERNAME` | Database user |
 | `PGDB_PASSWORD` | Database password |
 | `NEXTAUTH_SECRET` | Generate with `openssl rand -base64 32` |
@@ -49,7 +49,7 @@ Key variables:
 ### 3) Create Database
 
 ```sql
-CREATE DATABASE live_market_landing;
+CREATE DATABASE market_landing;
 ```
 
 ### 4) Initialize Tables
