@@ -63,11 +63,6 @@ BusinessAgreement.init(
       allowNull: false,
       field: "signature_data",
     },
-    documentUrls: {
-      type: DataTypes.JSON,
-      allowNull: true,
-      field: "document_urls",
-    },
     agreedAt: {
       type: DataTypes.DATE,
       allowNull: false,

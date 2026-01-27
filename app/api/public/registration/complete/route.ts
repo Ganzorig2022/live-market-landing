@@ -8,9 +8,6 @@ const completeSchema = z.object({
 		message: "You must agree to the terms and conditions",
 	}),
 	signatureData: z.string().min(1, "Signature is required"),
-	documentUrls: z
-		.array(z.string().url())
-		.min(1, "At least one agreement document is required"),
 });
 
 export async function POST(req: NextRequest) {
@@ -19,6 +16,7 @@ export async function POST(req: NextRequest) {
 
 		// Validate input
 		const validationResult = completeSchema.safeParse(body);
+
 		if (!validationResult.success) {
 			const errors = validationResult.error.errors.map((e) => e.message);
 			return NextResponse.json({ error: errors[0] }, { status: 400 });

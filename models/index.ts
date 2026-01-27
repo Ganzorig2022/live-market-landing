@@ -5,7 +5,6 @@ import { Warehouse } from "./Warehouse";
 import { PendingRegistration } from "./PendingRegistration";
 import { BusinessAgreement } from "./BusinessAgreement";
 
-// Define associations
 Business.hasMany(Shop, { foreignKey: "businessId", as: "shops" });
 Shop.belongsTo(Business, { foreignKey: "businessId", as: "business" });
 
@@ -23,7 +22,6 @@ BusinessAgreement.belongsTo(User, { foreignKey: "userId", as: "user" });
 
 export { User, Business, Shop, Warehouse, PendingRegistration, BusinessAgreement };
 
-// Export all models for easy access
 export const models = {
   User,
   Business,

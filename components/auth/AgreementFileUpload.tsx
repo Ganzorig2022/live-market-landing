@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { UploadButton } from "@uploadthing/react";
-import { X, FileText, Image as ImageIcon, Loader2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import type { OurFileRouter } from "@/app/api/uploadthing/core";
+import { Button } from "@/components/ui/button";
+import { UploadButton } from "@uploadthing/react";
+import { FileText, Image as ImageIcon, X } from "lucide-react";
+import { useState } from "react";
 
 interface AgreementFileUploadProps {
 	onFilesChange: (urls: string[]) => void;
@@ -66,12 +66,16 @@ export function AgreementFileUpload({
 					</div>
 
 					<div className="text-center">
-						<h3 className="font-medium">Upload Agreement Documents</h3>
+						<h3 className="font-medium">
+							Upload Agreement Documents
+						</h3>
 						<p className="mt-1 text-sm text-muted-foreground">
-							Upload scanned copies or photos of signed agreement documents
+							Upload scanned copies or photos of signed agreement
+							documents
 						</p>
 						<p className="mt-1 text-xs text-muted-foreground">
-							Supported: Images (max 4MB) and PDFs (max 8MB) • Maximum 3 files
+							Supported: Images (max 4MB) and PDFs (max 8MB) •
+							Maximum 3 files
 						</p>
 					</div>
 
@@ -92,8 +96,7 @@ export function AgreementFileUpload({
 						}}
 						disabled={disabled || uploadedFiles.length >= 3}
 						appearance={{
-							button:
-								"ut-ready:bg-primary ut-uploading:cursor-not-allowed ut-uploading:bg-primary/50 bg-primary text-primary-foreground hover:bg-primary/90 ut-button:w-full",
+							button: "ut-ready:bg-primary ut-uploading:cursor-not-allowed ut-uploading:bg-primary/50 bg-primary text-primary-foreground hover:bg-primary/90 ut-button:w-full",
 							allowedContent: "hidden",
 						}}
 					/>
@@ -117,8 +120,7 @@ export function AgreementFileUpload({
 						{uploadedFiles.map((file) => (
 							<div
 								key={file.url}
-								className="flex items-center justify-between rounded-lg border border-border bg-muted/50 p-3"
-							>
+								className="flex items-center justify-between rounded-lg border border-border bg-muted/50 p-3">
 								<div className="flex items-center gap-3 flex-1 min-w-0">
 									{file.type === "pdf" ? (
 										<FileText className="h-5 w-5 flex-shrink-0 text-red-500" />
@@ -133,8 +135,7 @@ export function AgreementFileUpload({
 											href={file.url}
 											target="_blank"
 											rel="noopener noreferrer"
-											className="text-xs text-primary hover:underline"
-										>
+											className="text-xs text-primary hover:underline">
 											View file
 										</a>
 									</div>
@@ -145,8 +146,7 @@ export function AgreementFileUpload({
 									size="sm"
 									onClick={() => handleRemoveFile(file.url)}
 									disabled={disabled}
-									className="flex-shrink-0"
-								>
+									className="flex-shrink-0">
 									<X className="h-4 w-4" />
 								</Button>
 							</div>

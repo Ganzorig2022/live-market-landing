@@ -8,8 +8,8 @@ export const ourFileRouter = {
 		image: { maxFileSize: "4MB", maxFileCount: 3 },
 		pdf: { maxFileSize: "8MB", maxFileCount: 3 },
 	}).onUploadComplete(async ({ file }) => {
-		console.log("Agreement document uploaded:", file.url);
-		return { url: file.url };
+		console.log("Agreement document uploaded:", file.ufsUrl);
+		return { url: file.ufsUrl };
 	}),
 } satisfies FileRouter;
 

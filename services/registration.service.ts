@@ -1,13 +1,5 @@
 import { getSequelize } from "@/lib/sequelize";
-import {
-	Business,
-	BusinessAgreement,
-	PendingRegistration,
-	Shop,
-	User,
-	Warehouse,
-} from "@/models";
-import { v4 as uuidv4 } from "uuid";
+import { PendingRegistration, User } from "@/models";
 import { sendOtp } from "./otp.service";
 
 export interface InitiateRegistrationData {
@@ -17,32 +9,13 @@ export interface InitiateRegistrationData {
 	phone: string;
 	businessName: string;
 	shopName: string;
-	numberOfEmployees: number | null;
 	hasMultipleShops: boolean;
-	hasMultipleWarehouses: boolean;
 }
 
 export interface CompleteRegistrationData {
 	registrationId: string;
 	agreedToTerms: boolean;
 	signatureData: string;
-	documentUrls?: string[];
-}
-
-/**
- * Generate a URL-friendly slug from business name
- */
-function generateSlug(name: string): string {
-	const baseSlug = name
-		.toLowerCase()
-		.replace(/[^a-z0-9\s-]/g, "")
-		.replace(/\s+/g, "-")
-		.replace(/-+/g, "-")
-		.trim();
-
-	// Add random suffix for uniqueness
-	const randomSuffix = Math.random().toString(36).substring(2, 6);
-	return `${baseSlug}-${randomSuffix}`;
 }
 
 /**
@@ -69,12 +42,14 @@ export async function initiateRegistration(
 		});
 
 		if (existingPending) {
-			// Delete old pending registration and create new one
-			await existingPending.destroy();
+			// TODO: instead of deletion, set "status" = false
+			await existingPending.update({
+				status: true,
+			});
 		}
 
 		// Create pending registration
-		const registrationId = uuidv4();
+		const registrationId = crypto.randomUUID();
 		await PendingRegistration.create({
 			id: registrationId,
 			email: data.email,
@@ -83,10 +58,9 @@ export async function initiateRegistration(
 			phone: data.phone,
 			businessName: data.businessName,
 			shopName: data.shopName,
-			numberOfEmployees: data.numberOfEmployees,
 			hasMultipleShops: data.hasMultipleShops,
-			hasMultipleWarehouses: data.hasMultipleWarehouses,
 			step: 1,
+			status: false,
 		});
 
 		// Send OTP
@@ -111,9 +85,7 @@ export async function initiateRegistration(
 /**
  * Get registration status
  */
-export async function getRegistrationStatus(
-	registrationId: string,
-): Promise<{
+export async function getRegistrationStatus(registrationId: string): Promise<{
 	success: boolean;
 	data?: Partial<PendingRegistration>;
 	error?: string;
@@ -157,7 +129,7 @@ export async function getRegistrationStatus(
 }
 
 /**
- * Step 3: Complete registration - create all entities
+ * Step 3: Complete registration - send request to ADMIN
  */
 export async function completeRegistration(
 	data: CompleteRegistrationData,
@@ -195,78 +167,6 @@ export async function completeRegistration(
 			await transaction.rollback();
 			return { success: false, error: "Signature is required" };
 		}
-
-		if (!data.documentUrls || data.documentUrls.length === 0) {
-			await transaction.rollback();
-			return {
-				success: false,
-				error: "At least one agreement document is required",
-			};
-		}
-
-		// Create Business
-		const business = await Business.create(
-			{
-				name: registration.businessName,
-				email: registration.email,
-				status: false, // Requires admin approval
-				numberOfEmployees: registration.numberOfEmployees ?? undefined,
-				hasMultipleShops: registration.hasMultipleShops,
-				hasMultipleWarehouses: registration.hasMultipleWarehouses,
-			},
-			{ transaction },
-		);
-
-		// Create Shop (user-provided name)
-		await Shop.create(
-			{
-				businessId: business.id,
-				name: registration.shopName,
-				slug: generateSlug(registration.shopName),
-				status: false,
-			},
-			{ transaction },
-		);
-
-		// Create Warehouse (auto-named)
-		await Warehouse.create(
-			{
-				businessId: business.id,
-				name: `${registration.businessName} Warehouse`,
-				address: undefined,
-				isActive: false,
-			},
-			{ transaction },
-		);
-
-		// Create User
-		const user = await User.create(
-			{
-				email: registration.email,
-				firstName: registration.firstName,
-				lastName: registration.lastName,
-				phone: registration.phone,
-				businessId: business.id,
-				isAdmin: false,
-				isActive: false, // Requires admin approval
-			},
-			{ transaction },
-		);
-
-		// Create Business Agreement with signature and documents
-		await BusinessAgreement.create(
-			{
-				businessId: business.id,
-				userId: user.id,
-				agreedToTerms: data.agreedToTerms,
-				signatureData: data.signatureData,
-				documentUrls: data.documentUrls,
-			},
-			{ transaction },
-		);
-
-		// Delete pending registration
-		await registration.destroy({ transaction });
 
 		// Commit transaction
 		await transaction.commit();
