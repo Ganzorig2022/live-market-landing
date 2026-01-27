@@ -69,9 +69,21 @@ export async function sendEmail({ to, subject, html }: SendEmailParams): Promise
 }
 
 /**
+ * Generate a 6-digit OTP code
+ */
+export function generateOtpCode(): string {
+  return Math.floor(100000 + Math.random() * 900000).toString();
+}
+
+/**
  * Send OTP verification email
  */
-export async function sendOtpEmail(to: string, otp: string, firstName: string): Promise<void> {
+export async function sendOtpEmail(params: {
+  to: string;
+  firstName: string;
+  otpCode: string;
+}): Promise<void> {
+  const { to, firstName, otpCode } = params;
   const subject = "Your Live Market Verification Code";
   const html = `
     <!DOCTYPE html>
@@ -84,18 +96,18 @@ export async function sendOtpEmail(to: string, otp: string, firstName: string): 
         .header { background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%); color: white; padding: 30px 20px; text-align: center; border-radius: 12px 12px 0 0; }
         .header h1 { margin: 0; font-size: 28px; }
         .content { padding: 40px 30px; background-color: #f9fafb; }
-        .otp-box { 
-          background: white; 
-          border: 2px dashed #6366F1; 
-          border-radius: 12px; 
-          padding: 30px; 
-          text-align: center; 
+        .otp-box {
+          background: white;
+          border: 2px dashed #6366F1;
+          border-radius: 12px;
+          padding: 30px;
+          text-align: center;
           margin: 30px 0;
         }
-        .otp-code { 
-          font-size: 48px; 
-          font-weight: bold; 
-          color: #6366F1; 
+        .otp-code {
+          font-size: 48px;
+          font-weight: bold;
+          color: #6366F1;
           letter-spacing: 8px;
           font-family: 'Courier New', monospace;
         }
@@ -111,11 +123,11 @@ export async function sendOtpEmail(to: string, otp: string, firstName: string): 
         <div class="content">
           <p>Hi ${firstName},</p>
           <p>Thank you for signing up! Please use the verification code below to complete your registration:</p>
-          
+
           <div class="otp-box">
-            <div class="otp-code">${otp}</div>
+            <div class="otp-code">${otpCode}</div>
           </div>
-          
+
           <p class="warning">⚠️ This code will expire in 10 minutes.</p>
           <p>If you didn't request this code, please ignore this email.</p>
         </div>

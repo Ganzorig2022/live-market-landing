@@ -3,9 +3,7 @@ import { PendingRegistration } from "@/models";
 /**
  * Get registration status
  */
-export async function getRegistrationStatus(
-	registrationId: string,
-): Promise<{
+export async function getRegistrationStatus(registrationId: string): Promise<{
 	success: boolean;
 	data?: Partial<PendingRegistration>;
 	error?: string;

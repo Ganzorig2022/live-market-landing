@@ -48,7 +48,7 @@ export default function SignupPage() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/signup/initiate", {
+      const res = await fetch("/api/public/registration/initiate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -178,7 +178,6 @@ export default function SignupPage() {
                   </div>
                 </div>
               </div>
-
             </div>
 
             {/* Business Information */}

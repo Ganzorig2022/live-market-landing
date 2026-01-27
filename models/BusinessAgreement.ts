@@ -7,14 +7,15 @@ export interface BusinessAgreementAttributes {
   userId: string;
   agreedToTerms: boolean;
   signatureData: string;
-  signedAt: Date;
+  documentUrls?: string[] | null;
+  agreedAt: Date;
   createdAt: Date;
   updatedAt: Date;
 }
 
 type BusinessAgreementCreationAttributes = Optional<
   BusinessAgreementAttributes,
-  "id" | "signedAt" | "createdAt" | "updatedAt"
+  "id" | "documentUrls" | "agreedAt" | "createdAt" | "updatedAt"
 >;
 
 class BusinessAgreement extends Model<BusinessAgreementAttributes, BusinessAgreementCreationAttributes>
@@ -24,7 +25,8 @@ class BusinessAgreement extends Model<BusinessAgreementAttributes, BusinessAgree
   declare userId: string;
   declare agreedToTerms: boolean;
   declare signatureData: string;
-  declare signedAt: Date;
+  declare documentUrls?: string[] | null;
+  declare agreedAt: Date;
   declare readonly createdAt: Date;
   declare readonly updatedAt: Date;
 
@@ -61,11 +63,11 @@ BusinessAgreement.init(
       allowNull: false,
       field: "signature_data",
     },
-    signedAt: {
+    agreedAt: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW,
-      field: "signed_at",
+      field: "agreed_at",
     },
     createdAt: {
       type: DataTypes.DATE,
