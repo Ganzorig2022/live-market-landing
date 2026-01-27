@@ -12,14 +12,14 @@ export interface BusinessAttributes {
   status: boolean;
   numberOfEmployees?: number;
   hasMultipleShops: boolean;
-  hasMultipleWarehouses: boolean;
+  hasMultipleWarehouses?: boolean;
   createdAt: Date;
   updatedAt: Date;
   deletedAt?: Date | null;
   shops?: ShopAttributes[];
 }
 
-type BusinessCreationAttributes = Optional<BusinessAttributes, "id" | "createdAt" | "updatedAt" | "deletedAt" | "numberOfEmployees">;
+type BusinessCreationAttributes = Optional<BusinessAttributes, "id" | "createdAt" | "updatedAt" | "deletedAt" | "numberOfEmployees" | "hasMultipleWarehouses">;
 
 class Business extends Model<BusinessAttributes, BusinessCreationAttributes> implements BusinessAttributes {
   declare id: string;
@@ -28,7 +28,7 @@ class Business extends Model<BusinessAttributes, BusinessCreationAttributes> imp
   declare status: boolean;
   declare numberOfEmployees?: number;
   declare hasMultipleShops: boolean;
-  declare hasMultipleWarehouses: boolean;
+  declare hasMultipleWarehouses?: boolean;
   declare readonly createdAt: Date;
   declare readonly updatedAt: Date;
   declare readonly deletedAt?: Date | null;

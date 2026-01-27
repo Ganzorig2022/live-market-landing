@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { SignupStepper } from "@/components/auth/SignupStepper";
 import {
-  User, Mail, Lock, Phone, Building2, Store, Users,
+  User, Mail, Phone, Building2, Store,
   Loader2, AlertCircle, ArrowRight
 } from "lucide-react";
 
@@ -23,13 +23,9 @@ export default function SignupPage() {
     lastName: "",
     email: "",
     phone: "",
-    password: "",
-    confirmPassword: "",
     businessName: "",
     shopName: "",
-    numberOfEmployees: null as number | null,
     hasMultipleShops: false,
-    hasMultipleWarehouses: false,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -46,30 +42,9 @@ export default function SignupPage() {
     }));
   };
 
-  const handleNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value === "" ? null : parseInt(e.target.value, 10);
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: value,
-    }));
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-
-    // Validate passwords match
-    if (formData.password !== formData.confirmPassword) {
-      setError("Нууц үг таарахгүй байна");
-      return;
-    }
-
-    // Validate password length
-    if (formData.password.length < 8) {
-      setError("Нууц үг хамгийн багадаа 8 тэмдэгт байх ёстой");
-      return;
-    }
-
     setLoading(true);
 
     try {
@@ -78,15 +53,12 @@ export default function SignupPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: formData.email,
-          password: formData.password,
           firstName: formData.firstName,
           lastName: formData.lastName,
           phone: formData.phone,
           businessName: formData.businessName,
           shopName: formData.shopName,
-          numberOfEmployees: formData.numberOfEmployees,
           hasMultipleShops: formData.hasMultipleShops,
-          hasMultipleWarehouses: formData.hasMultipleWarehouses,
         }),
       });
 
@@ -207,44 +179,6 @@ export default function SignupPage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div className="space-y-2">
-                  <Label htmlFor="password">Нууц үг</Label>
-                  <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                    <Input
-                      id="password"
-                      name="password"
-                      type="password"
-                      placeholder="••••••••"
-                      value={formData.password}
-                      onChange={handleChange}
-                      className="pl-10"
-                      required
-                      disabled={loading}
-                      minLength={8}
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="confirmPassword">Нууц үг давтах</Label>
-                  <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                    <Input
-                      id="confirmPassword"
-                      name="confirmPassword"
-                      type="password"
-                      placeholder="••••••••"
-                      value={formData.confirmPassword}
-                      onChange={handleChange}
-                      className="pl-10"
-                      required
-                      disabled={loading}
-                    />
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* Business Information */}
@@ -287,63 +221,23 @@ export default function SignupPage() {
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="numberOfEmployees">Ажилтны тоо (Сонголттой)</Label>
-                <div className="relative">
-                  <Users className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                  <Input
-                    id="numberOfEmployees"
-                    name="numberOfEmployees"
-                    type="number"
-                    min="1"
-                    placeholder="e.g., 10"
-                    value={formData.numberOfEmployees ?? ""}
-                    onChange={handleNumberChange}
-                    className="pl-10"
-                    disabled={loading}
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex items-start space-x-3">
-                  <input
-                    type="checkbox"
-                    id="hasMultipleShops"
-                    name="hasMultipleShops"
-                    checked={formData.hasMultipleShops}
-                    onChange={handleCheckboxChange}
-                    disabled={loading}
-                    className="mt-1 h-4 w-4 rounded border-input bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  />
-                  <div className="space-y-1">
-                    <Label htmlFor="hasMultipleShops" className="cursor-pointer">
-                      Надад олон дэлгүүр/салбар байгаа
-                    </Label>
-                    <p className="text-xs text-muted-foreground">
-                      Хэрэв та нэгээс олон салбар дэлгүүртэй бол сонгоно уу
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-3">
-                  <input
-                    type="checkbox"
-                    id="hasMultipleWarehouses"
-                    name="hasMultipleWarehouses"
-                    checked={formData.hasMultipleWarehouses}
-                    onChange={handleCheckboxChange}
-                    disabled={loading}
-                    className="mt-1 h-4 w-4 rounded border-input bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  />
-                  <div className="space-y-1">
-                    <Label htmlFor="hasMultipleWarehouses" className="cursor-pointer">
-                      Надад олон агуулах байгаа
-                    </Label>
-                    <p className="text-xs text-muted-foreground">
-                      Хэрэв та нэгээс олон агуулахтай бол сонгоно уу
-                    </p>
-                  </div>
+              <div className="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  id="hasMultipleShops"
+                  name="hasMultipleShops"
+                  checked={formData.hasMultipleShops}
+                  onChange={handleCheckboxChange}
+                  disabled={loading}
+                  className="mt-1 h-4 w-4 rounded border-input bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                />
+                <div className="space-y-1">
+                  <Label htmlFor="hasMultipleShops" className="cursor-pointer">
+                    Надад олон дэлгүүр/салбар байгаа
+                  </Label>
+                  <p className="text-xs text-muted-foreground">
+                    Хэрэв та нэгээс олон салбар дэлгүүртэй бол сонгоно уу
+                  </p>
                 </div>
               </div>
             </div>

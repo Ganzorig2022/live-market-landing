@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { completeRegistration } from "@/services/registration.service";
 
 const completeSchema = z.object({
   registrationId: z.string().uuid("Invalid registration ID"),
@@ -21,15 +20,37 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: errors[0] }, { status: 400 });
     }
 
-    const result = await completeRegistration(validationResult.data);
+    const data = validationResult.data;
 
-    if (result.success) {
+    // Call admin API to complete registration
+    const adminApiUrl = process.env.NEXT_PUBLIC_API_URL;
+    if (!adminApiUrl) {
+      console.error("NEXT_PUBLIC_API_URL is not configured");
+      return NextResponse.json({ error: "Server configuration error" }, { status: 500 });
+    }
+
+    const response = await fetch(`${adminApiUrl}/public/registration/complete`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        registrationId: data.registrationId,
+        agreedToTerms: data.agreedToTerms,
+        signatureData: data.signatureData,
+      }),
+    });
+
+    const result = await response.json();
+
+    if (response.ok && result.success) {
       return NextResponse.json({
         success: true,
-        message: "Registration completed successfully. Your account is pending approval.",
+        message: result.message || "Registration completed successfully. Your account is pending approval.",
       });
     } else {
-      return NextResponse.json({ error: result.error }, { status: 400 });
+      return NextResponse.json(
+        { error: result.error || "Failed to complete registration" },
+        { status: response.status }
+      );
     }
   } catch (error) {
     console.error("Complete registration error:", error);

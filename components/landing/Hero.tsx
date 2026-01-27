@@ -3,6 +3,9 @@ import { ShoppingBag, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function Hero() {
+  const adminLoginUrl =
+    process.env.NEXT_PUBLIC_ADMIN_LOGIN_URL ?? "/login";
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-white via-purple-50/30 to-pink-50/30">
       {/* Background decoration - softer, more subtle */}
@@ -46,7 +49,7 @@ export function Hero() {
                 asChild
                 className="w-full sm:w-auto rounded-full px-8"
               >
-                <Link href="https://lm-admin.lvg.mn/login">Нэвтрэх</Link>
+                <Link href={adminLoginUrl}>Нэвтрэх</Link>
               </Button>
             </div>
 

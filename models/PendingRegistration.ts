@@ -1,142 +1,130 @@
 import {
-  Model,
-  DataTypes,
-  InferAttributes,
-  InferCreationAttributes,
-  CreationOptional,
+	Model,
+	DataTypes,
+	InferAttributes,
+	InferCreationAttributes,
+	CreationOptional,
 } from "sequelize";
 import { getSequelize } from "@/lib/sequelize";
 
 export class PendingRegistration extends Model<
-  InferAttributes<PendingRegistration>,
-  InferCreationAttributes<PendingRegistration>
+	InferAttributes<PendingRegistration>,
+	InferCreationAttributes<PendingRegistration>
 > {
-  declare id: string; // UUID
-  declare email: string;
-  declare password: string; // Hashed
-  declare firstName: string;
-  declare lastName: string;
-  declare phone: string;
-  declare businessName: string;
-  declare shopName: string;
-  declare numberOfEmployees: CreationOptional<number | null>;
-  declare hasMultipleShops: CreationOptional<boolean>;
-  declare hasMultipleWarehouses: CreationOptional<boolean>;
-  declare otpCode: CreationOptional<string | null>;
-  declare otpExpiresAt: CreationOptional<Date | null>;
-  declare otpVerified: CreationOptional<boolean>;
-  declare signatureData: CreationOptional<string | null>; // Base64 image
-  declare agreedToTerms: CreationOptional<boolean>;
-  declare step: CreationOptional<number>; // 1, 2, or 3
-  declare createdAt: CreationOptional<Date>;
-  declare updatedAt: CreationOptional<Date>;
+	declare id: string; // UUID
+	declare email: string;
+	declare firstName: string;
+	declare lastName: string;
+	declare phone: string;
+	declare businessName: string;
+	declare shopName: string;
+	declare hasMultipleShops: CreationOptional<boolean>;
+	declare status: CreationOptional<boolean>;
+	declare otpCode: CreationOptional<string | null>;
+	declare otpExpiresAt: CreationOptional<Date | null>;
+	declare otpVerified: CreationOptional<boolean>;
+	declare step: CreationOptional<number>; // 1, 2, or 3
+	declare createdAt: CreationOptional<Date>;
+	declare updatedAt: CreationOptional<Date>;
+	declare approvedAt?: Date | null;
+	declare approvedBy?: string | null;
 }
 
 PendingRegistration.init(
-  {
-    id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
-    },
-    email: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
-      unique: true,
-      validate: {
-        isEmail: true,
-      },
-    },
-    password: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
-    },
-    firstName: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-      field: "first_name",
-    },
-    lastName: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-      field: "last_name",
-    },
-    phone: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
-    },
-    businessName: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
-      field: "business_name",
-    },
-    shopName: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
-      field: "shop_name",
-    },
-    numberOfEmployees: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      field: "number_of_employees",
-    },
-    hasMultipleShops: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-      field: "has_multiple_shops",
-    },
-    hasMultipleWarehouses: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-      field: "has_multiple_warehouses",
-    },
-    otpCode: {
-      type: DataTypes.STRING(6),
-      allowNull: true,
-      field: "otp_code",
-    },
-    otpExpiresAt: {
-      type: DataTypes.DATE,
-      allowNull: true,
-      field: "otp_expires_at",
-    },
-    otpVerified: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-      field: "otp_verified",
-    },
-    signatureData: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-      field: "signature_data",
-    },
-    agreedToTerms: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-      field: "agreed_to_terms",
-    },
-    step: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 1,
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      field: "created_at",
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      field: "updated_at",
-    },
-  },
-  {
-    sequelize: getSequelize(),
-    tableName: "pending_registrations",
-    underscored: true,
-    timestamps: true,
-  }
+	{
+		id: {
+			type: DataTypes.UUID,
+			primaryKey: true,
+			defaultValue: DataTypes.UUIDV4,
+		},
+		email: {
+			type: DataTypes.STRING(255),
+			allowNull: false,
+		},
+		firstName: {
+			type: DataTypes.STRING(255),
+			allowNull: false,
+			field: "first_name",
+		},
+		lastName: {
+			type: DataTypes.STRING(255),
+			allowNull: false,
+			field: "last_name",
+		},
+		phone: {
+			type: DataTypes.STRING(255),
+			allowNull: false,
+		},
+		businessName: {
+			type: DataTypes.STRING(255),
+			allowNull: false,
+			field: "business_name",
+		},
+		shopName: {
+			type: DataTypes.STRING(255),
+			allowNull: false,
+			field: "shop_name",
+		},
+		hasMultipleShops: {
+			type: DataTypes.BOOLEAN,
+			allowNull: false,
+			defaultValue: false,
+			field: "has_multiple_shops",
+		},
+		step: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			defaultValue: 1,
+		},
+		status: {
+			type: DataTypes.BOOLEAN,
+			allowNull: false,
+			defaultValue: false,
+		},
+		otpVerified: {
+			type: DataTypes.BOOLEAN,
+			allowNull: false,
+			defaultValue: false,
+			field: "otp_verified",
+		},
+		otpCode: {
+			type: DataTypes.STRING(10),
+			allowNull: true,
+			field: "otp_code",
+		},
+		otpExpiresAt: {
+			type: DataTypes.DATE,
+			allowNull: true,
+			field: "otp_expires_at",
+		},
+		createdAt: {
+			type: DataTypes.DATE,
+			allowNull: false,
+			defaultValue: DataTypes.NOW,
+			field: "created_at",
+		},
+		updatedAt: {
+			type: DataTypes.DATE,
+			allowNull: false,
+			defaultValue: DataTypes.NOW,
+			field: "updated_at",
+		},
+		approvedAt: {
+			type: DataTypes.DATE,
+			allowNull: true,
+			field: "approved_at",
+		},
+		approvedBy: {
+			type: DataTypes.BIGINT,
+			allowNull: true,
+			field: "approved_by",
+		},
+	},
+	{
+		sequelize: getSequelize(),
+		tableName: "pending_registrations",
+		timestamps: true,
+		createdAt: "createdAt",
+		updatedAt: "updatedAt",
+	},
 );
