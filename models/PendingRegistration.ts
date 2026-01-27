@@ -13,7 +13,6 @@ export class PendingRegistration extends Model<
 > {
   declare id: string; // UUID
   declare email: string;
-  declare password: string; // Hashed
   declare firstName: string;
   declare lastName: string;
   declare phone: string;
@@ -22,11 +21,10 @@ export class PendingRegistration extends Model<
   declare numberOfEmployees: CreationOptional<number | null>;
   declare hasMultipleShops: CreationOptional<boolean>;
   declare hasMultipleWarehouses: CreationOptional<boolean>;
+  declare password: string; // Hashed password
   declare otpCode: CreationOptional<string | null>;
   declare otpExpiresAt: CreationOptional<Date | null>;
   declare otpVerified: CreationOptional<boolean>;
-  declare signatureData: CreationOptional<string | null>; // Base64 image
-  declare agreedToTerms: CreationOptional<boolean>;
   declare step: CreationOptional<number>; // 1, 2, or 3
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
@@ -46,10 +44,6 @@ PendingRegistration.init(
       validate: {
         isEmail: true,
       },
-    },
-    password: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
     },
     firstName: {
       type: DataTypes.STRING(100),
@@ -92,8 +86,12 @@ PendingRegistration.init(
       defaultValue: false,
       field: "has_multiple_warehouses",
     },
+    password: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
     otpCode: {
-      type: DataTypes.STRING(6),
+      type: DataTypes.STRING(10),
       allowNull: true,
       field: "otp_code",
     },
@@ -107,17 +105,6 @@ PendingRegistration.init(
       allowNull: false,
       defaultValue: false,
       field: "otp_verified",
-    },
-    signatureData: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-      field: "signature_data",
-    },
-    agreedToTerms: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-      field: "agreed_to_terms",
     },
     step: {
       type: DataTypes.INTEGER,

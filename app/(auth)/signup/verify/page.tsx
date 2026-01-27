@@ -23,7 +23,7 @@ function VerifyOTPContent() {
   // Fetch registration info
   useEffect(() => {
     if (registrationId) {
-      fetch(`/api/signup/status?id=${registrationId}`)
+      fetch(`/api/public/registration/status?id=${registrationId}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.success) {
@@ -94,7 +94,7 @@ function VerifyOTPContent() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/signup/verify-otp", {
+      const res = await fetch("/api/public/registration/verify-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -124,7 +124,7 @@ function VerifyOTPContent() {
     setError("");
 
     try {
-      const res = await fetch("/api/signup/send-otp", {
+      const res = await fetch("/api/public/registration/send-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ registrationId }),

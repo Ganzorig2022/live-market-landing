@@ -1,4 +1,3 @@
-import bcrypt from "bcryptjs";
 import { v4 as uuidv4 } from "uuid";
 import {
 	PendingRegistration,
@@ -10,10 +9,10 @@ import {
 } from "@/models";
 import { sendOtp } from "./otp.service";
 import { getSequelize } from "@/lib/sequelize";
+import { generateRandomPassword, hashPassword } from "@/lib/password";
 
 export interface InitiateRegistrationData {
 	email: string;
-	password: string;
 	firstName: string;
 	lastName: string;
 	phone: string;
@@ -28,6 +27,7 @@ export interface CompleteRegistrationData {
 	registrationId: string;
 	agreedToTerms: boolean;
 	signatureData: string;
+	documentUrls?: string[];
 }
 
 /**
@@ -74,8 +74,9 @@ export async function initiateRegistration(
 			await existingPending.destroy();
 		}
 
-		// Hash password
-		const hashedPassword = await bcrypt.hash(data.password, 10);
+		// Generate and hash random password
+		const randomPassword = generateRandomPassword();
+		const hashedPassword = await hashPassword(randomPassword);
 
 		// Create pending registration
 		const registrationId = uuidv4();
@@ -201,6 +202,14 @@ export async function completeRegistration(
 			return { success: false, error: "Signature is required" };
 		}
 
+		if (!data.documentUrls || data.documentUrls.length === 0) {
+			await transaction.rollback();
+			return {
+				success: false,
+				error: "At least one agreement document is required",
+			};
+		}
+
 		// Create Business
 		const business = await Business.create(
 			{
@@ -251,13 +260,14 @@ export async function completeRegistration(
 			{ transaction },
 		);
 
-		// Create Business Agreement with signature
+		// Create Business Agreement with signature and documents
 		await BusinessAgreement.create(
 			{
 				businessId: business.id,
 				userId: user.id,
 				agreedToTerms: data.agreedToTerms,
 				signatureData: data.signatureData,
+				documentUrls: data.documentUrls,
 			},
 			{ transaction },
 		);

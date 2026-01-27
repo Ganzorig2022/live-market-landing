@@ -1,12 +1,5 @@
 import { PendingRegistration } from "@/models";
-import { sendOtpEmail } from "@/lib/email";
-
-/**
- * Generate a 6-digit OTP code
- */
-export function generateOtpCode(): string {
-  return Math.floor(100000 + Math.random() * 900000).toString();
-}
+import { sendOtpEmail, generateOtpCode } from "@/lib/email";
 
 /**
  * Generate OTP and send email
@@ -28,7 +21,11 @@ export async function sendOtp(registrationId: string): Promise<{ success: boolea
     });
 
     // Send OTP email
-    await sendOtpEmail(registration.email, otpCode, registration.firstName);
+    await sendOtpEmail({
+      to: registration.email,
+      firstName: registration.firstName,
+      otpCode: otpCode,
+    });
 
     return { success: true };
   } catch (error) {

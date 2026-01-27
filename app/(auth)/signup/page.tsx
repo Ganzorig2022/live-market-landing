@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { SignupStepper } from "@/components/auth/SignupStepper";
 import {
-  User, Mail, Lock, Phone, Building2, Store, Users,
+  User, Mail, Phone, Building2, Store, Users,
   Loader2, AlertCircle, ArrowRight
 } from "lucide-react";
 
@@ -23,8 +23,6 @@ export default function SignupPage() {
     lastName: "",
     email: "",
     phone: "",
-    password: "",
-    confirmPassword: "",
     businessName: "",
     shopName: "",
     numberOfEmployees: null as number | null,
@@ -57,28 +55,14 @@ export default function SignupPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-
-    // Validate passwords match
-    if (formData.password !== formData.confirmPassword) {
-      setError("Нууц үг таарахгүй байна");
-      return;
-    }
-
-    // Validate password length
-    if (formData.password.length < 8) {
-      setError("Нууц үг хамгийн багадаа 8 тэмдэгт байх ёстой");
-      return;
-    }
-
     setLoading(true);
 
     try {
-      const res = await fetch("/api/signup/initiate", {
+      const res = await fetch("/api/public/registration/initiate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: formData.email,
-          password: formData.password,
           firstName: formData.firstName,
           lastName: formData.lastName,
           phone: formData.phone,
@@ -198,45 +182,6 @@ export default function SignupPage() {
                       type="tel"
                       placeholder="+1 (555) 000-0000"
                       value={formData.phone}
-                      onChange={handleChange}
-                      className="pl-10"
-                      required
-                      disabled={loading}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div className="space-y-2">
-                  <Label htmlFor="password">Нууц үг</Label>
-                  <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                    <Input
-                      id="password"
-                      name="password"
-                      type="password"
-                      placeholder="••••••••"
-                      value={formData.password}
-                      onChange={handleChange}
-                      className="pl-10"
-                      required
-                      disabled={loading}
-                      minLength={8}
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="confirmPassword">Нууц үг давтах</Label>
-                  <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                    <Input
-                      id="confirmPassword"
-                      name="confirmPassword"
-                      type="password"
-                      placeholder="••••••••"
-                      value={formData.confirmPassword}
                       onChange={handleChange}
                       className="pl-10"
                       required

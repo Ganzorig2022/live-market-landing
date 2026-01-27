@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { SignupStepper } from "@/components/auth/SignupStepper";
 import { SignatureCanvas } from "@/components/auth/SignatureCanvas";
+import { AgreementFileUpload } from "@/components/auth/AgreementFileUpload";
 import { Loader2, AlertCircle, CheckCircle2, FileText, ScrollText } from "lucide-react";
 
 const termsContent = `
@@ -63,12 +64,13 @@ function AgreementContent() {
   const [error, setError] = useState("");
   const [agreed, setAgreed] = useState(false);
   const [signatureData, setSignatureData] = useState<string | null>(null);
+  const [documentUrls, setDocumentUrls] = useState<string[]>([]);
   const [businessName, setBusinessName] = useState("");
 
   // Fetch registration info
   useEffect(() => {
     if (registrationId) {
-      fetch(`/api/signup/status?id=${registrationId}`)
+      fetch(`/api/public/registration/status?id=${registrationId}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.success) {
@@ -98,17 +100,23 @@ function AgreementContent() {
       return;
     }
 
+    if (documentUrls.length === 0) {
+      setError("Дор хаяж нэг баримт бичиг оруулах шаардлагатай");
+      return;
+    }
+
     setError("");
     setLoading(true);
 
     try {
-      const res = await fetch("/api/signup/complete", {
+      const res = await fetch("/api/public/registration/complete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           registrationId,
           agreedToTerms: agreed,
           signatureData,
+          documentUrls,
         }),
       });
 
@@ -207,6 +215,18 @@ function AgreementContent() {
             </span>
           </label>
 
+          {/* Agreement Documents Upload */}
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+              <FileText className="h-4 w-4" />
+              Гэрээний баримт бичиг
+            </div>
+            <AgreementFileUpload
+              onFilesChange={setDocumentUrls}
+              disabled={loading}
+            />
+          </div>
+
           {/* Signature */}
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
@@ -223,7 +243,7 @@ function AgreementContent() {
           <Button
             onClick={handleComplete}
             className="w-full gradient-bg hover:opacity-90"
-            disabled={loading || !agreed || !signatureData}
+            disabled={loading || !agreed || !signatureData || documentUrls.length === 0}
           >
             {loading ? (
               <>
