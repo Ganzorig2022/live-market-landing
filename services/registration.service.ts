@@ -1,15 +1,14 @@
-import { v4 as uuidv4 } from "uuid";
-import {
-	PendingRegistration,
-	Business,
-	Shop,
-	Warehouse,
-	User,
-	BusinessAgreement,
-} from "@/models";
-import { sendOtp } from "./otp.service";
 import { getSequelize } from "@/lib/sequelize";
-import { generateRandomPassword, hashPassword } from "@/lib/password";
+import {
+	Business,
+	BusinessAgreement,
+	PendingRegistration,
+	Shop,
+	User,
+	Warehouse,
+} from "@/models";
+import { v4 as uuidv4 } from "uuid";
+import { sendOtp } from "./otp.service";
 
 export interface InitiateRegistrationData {
 	email: string;
@@ -74,16 +73,11 @@ export async function initiateRegistration(
 			await existingPending.destroy();
 		}
 
-		// Generate and hash random password
-		const randomPassword = generateRandomPassword();
-		const hashedPassword = await hashPassword(randomPassword);
-
 		// Create pending registration
 		const registrationId = uuidv4();
 		await PendingRegistration.create({
 			id: registrationId,
 			email: data.email,
-			password: hashedPassword,
 			firstName: data.firstName,
 			lastName: data.lastName,
 			phone: data.phone,
@@ -249,7 +243,6 @@ export async function completeRegistration(
 		const user = await User.create(
 			{
 				email: registration.email,
-				password: registration.password, // Already hashed
 				firstName: registration.firstName,
 				lastName: registration.lastName,
 				phone: registration.phone,

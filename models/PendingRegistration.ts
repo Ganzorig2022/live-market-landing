@@ -21,7 +21,6 @@ export class PendingRegistration extends Model<
   declare numberOfEmployees: CreationOptional<number | null>;
   declare hasMultipleShops: CreationOptional<boolean>;
   declare hasMultipleWarehouses: CreationOptional<boolean>;
-  declare password: string; // Hashed password
   declare otpCode: CreationOptional<string | null>;
   declare otpExpiresAt: CreationOptional<Date | null>;
   declare otpVerified: CreationOptional<boolean>;
@@ -85,10 +84,6 @@ PendingRegistration.init(
       allowNull: false,
       defaultValue: false,
       field: "has_multiple_warehouses",
-    },
-    password: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
     },
     otpCode: {
       type: DataTypes.STRING(10),
