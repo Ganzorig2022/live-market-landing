@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ShoppingBag } from "lucide-react";
 
 export default function AuthLayout({
   children,
@@ -11,11 +10,8 @@ export default function AuthLayout({
       {/* Simple header with logo */}
       <header className="border-b border-border">
         <div className="container mx-auto flex h-16 items-center px-4 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg gradient-bg">
-              <ShoppingBag className="h-5 w-5 text-white" />
-            </div>
-            <span className="text-xl font-bold gradient-text">Live Market</span>
+          <Link href="/" className="flex items-center">
+            <img src="/logo.svg" alt="Live Market" className="h-7 w-auto" />
           </Link>
         </div>
       </header>

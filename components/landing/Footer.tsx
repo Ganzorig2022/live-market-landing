@@ -25,8 +25,8 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-5">
           {/* Brand */}
           <div className="col-span-2 lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="text-xl font-bold text-primary">Live Market</span>
+            <Link href="/" className="flex items-center">
+              <img src="/logo.svg" alt="Live Market" className="h-7 w-auto" />
             </Link>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground leading-relaxed">
               Шууд худалдааны худалдагчдад зориулсан бүх зүйл нэг дор байх платформ. Нэвтрүүлэг хийж, худалдаж, бизнесээ өсгөөрэй.

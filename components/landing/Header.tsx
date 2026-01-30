@@ -18,8 +18,8 @@ export function Header() {
     <header className="w-full pt-4 pb-2 px-4 sm:px-6 lg:px-8">
       <nav className="container mx-auto bg-white rounded-[2rem] shadow-sm border border-border px-6 py-3 flex h-16 items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-xl font-bold text-primary">Live Market</span>
+        <Link href="/" className="flex items-center">
+          <img src="/logo.svg" alt="Live Market" className="h-8 w-auto" />
         </Link>
 
         {/* Desktop Navigation */}
