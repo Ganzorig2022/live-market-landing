@@ -245,7 +245,7 @@ export default function SignupPage() {
           <CardFooter className="flex flex-col gap-4">
             <Button
               type="submit"
-              className="w-full gradient-bg hover:opacity-90"
+              className="w-full gradient-bg hover:opacity-90 text-white mt-4"
               disabled={loading}
             >
               {loading ? (

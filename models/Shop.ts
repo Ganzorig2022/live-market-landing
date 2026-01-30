@@ -1,7 +1,5 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { getSequelize } from "@/lib/sequelize";
-import type { Order } from "./Order";
-import type { File } from "./File";
 import type { User } from "./User";
 import { BusinessAttributes } from "@/models/Business";
 
@@ -25,8 +23,6 @@ export interface ShopAttributes {
   updatedAt: Date;
   deletedAt?: Date | null;
   business?: BusinessAttributes;
-  logo?: File;
-  image?: File;
 }
 
 type ShopCreationAttributes = Optional<
@@ -70,9 +66,6 @@ class Shop extends Model<ShopAttributes, ShopCreationAttributes> implements Shop
   // Associations will be defined in index.ts
   public business?: BusinessAttributes;
   public cashiers?: User[];
-  public orders?: Order[];
-  public logo?: File;
-  public image?: File;
 }
 
 Shop.init(

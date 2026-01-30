@@ -1,7 +1,6 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { getSequelize } from "@/lib/sequelize";
 import type { BusinessAttributes } from "./Business";
-import type { Inventory } from "./Inventory";
 
 export interface WarehouseAttributes {
   id: string;
@@ -32,7 +31,6 @@ class Warehouse extends Model<WarehouseAttributes, WarehouseCreationAttributes> 
 
   // Associations will be defined in index.ts
   public business?: BusinessAttributes;
-  public inventories?: Inventory[];
 }
 
 Warehouse.init(

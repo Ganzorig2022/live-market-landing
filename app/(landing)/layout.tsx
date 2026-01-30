@@ -7,7 +7,7 @@ export default function LandingLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen flex-col bg-[#F9FAFB]">
+    <div className="flex min-h-screen flex-col bg-[#F7F8FB]">
       <Header />
       <main className="flex-1">{children}</main>
       <Footer />

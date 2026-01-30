@@ -22,9 +22,6 @@ async function seed() {
       password: hashedPassword,
       firstName: "Admin",
       lastName: "User",
-      phone: null,
-      businessId: null,
-      role: "staff", // Admin doesn't need owner role
       isAdmin: true,
       isActive: true, // Admin is active by default
     });

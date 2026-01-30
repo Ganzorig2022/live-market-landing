@@ -1,8 +1,5 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { getSequelize } from "@/lib/sequelize";
-import type { Product } from "./Product";
-import type { Order } from "./Order";
-import type { Bank } from "./Bank";
 import { ShopAttributes } from "@/models/Shop";
 
 export interface BusinessAttributes {
@@ -35,9 +32,6 @@ class Business extends Model<BusinessAttributes, BusinessCreationAttributes> imp
 
   // Associations will be defined in index.ts
   public shops?: ShopAttributes[];
-  public products?: Product[];
-  public orders?: Order[];
-  public banks?: Bank[];
 }
 
 Business.init(

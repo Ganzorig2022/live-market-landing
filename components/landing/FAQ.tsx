@@ -45,9 +45,9 @@ export function FAQ() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-[#1E0E62] sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">
             Түгээмэл{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">асуултууд</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-brand">асуултууд</span>
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
             Хайж буй зүйлээ олохгүй байна уу? Манай тусламжийн багтай холбогдоорой.
@@ -62,7 +62,7 @@ export function FAQ() {
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 className="flex w-full items-center justify-between px-6 py-5 text-left transition-colors hover:bg-gray-50"
               >
-                <span className="text-base font-medium pr-4 text-[#1E0E62]">{faq.question}</span>
+                <span className="text-base font-medium pr-4 text-primary">{faq.question}</span>
                 <ChevronDown
                   className={cn(
                     "h-5 w-5 flex-shrink-0 text-muted-foreground transition-transform duration-200",

@@ -1,21 +1,13 @@
 import Link from "next/link";
-import { ShoppingBag, Facebook, Twitter, Instagram, Youtube } from "lucide-react";
+import { Facebook, Twitter, Instagram, Youtube } from "lucide-react";
 
 const footerLinks = {
-  // product: [
-  //   { href: "#features", label: "Боломжууд" },
-  //   { href: "#how-it-works", label: "Хэрхэн ажилладаг" },
-  //   { href: "#faq", label: "Түгээмэл асуултууд" },
-  // ],
   company: [
     { href: "/about", label: "Бидний тухай" },
     { href: "/contact", label: "Холбоо барих" },
-    // { href: "/careers", label: "Ажлын байр" },
   ],
   legal: [
     { href: "/terms", label: "Үйлчилгээний нөхцөл" },
-    // { href: "/privacy", label: "Нууцлалын бодлого" },
-    // { href: "/cookies", label: "Күүкийн бодлого" },
   ],
 };
 
@@ -34,7 +26,7 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-2 lg:col-span-2">
             <Link href="/" className="flex items-center gap-2">
-              <span className="text-xl font-bold text-[#1E0E62]">Live Market</span>
+              <span className="text-xl font-bold text-primary">Live Market</span>
             </Link>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground leading-relaxed">
               Шууд худалдааны худалдагчдад зориулсан бүх зүйл нэг дор байх платформ. Нэвтрүүлэг хийж, худалдаж, бизнесээ өсгөөрэй.
@@ -45,7 +37,7 @@ export function Footer() {
                 <a
                   key={social.label}
                   href={social.href}
-                  className="text-muted-foreground transition-colors hover:text-[#1E0E62]"
+                  className="text-muted-foreground transition-colors hover:text-primary"
                   aria-label={social.label}
                 >
                   <social.icon className="h-5 w-5" />
@@ -56,13 +48,13 @@ export function Footer() {
 
           {/* Company Links */}
           <div>
-            <h3 className="text-sm font-semibold text-[#1E0E62]">Компани</h3>
+            <h3 className="text-sm font-semibold text-primary">Компани</h3>
             <ul className="mt-4 space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-[#1E0E62]"
+                    className="text-sm text-muted-foreground transition-colors hover:text-primary"
                   >
                     {link.label}
                   </Link>
@@ -73,13 +65,13 @@ export function Footer() {
 
           {/* Legal Links */}
           <div>
-            <h3 className="text-sm font-semibold text-[#1E0E62]">Хууль зүй</h3>
+            <h3 className="text-sm font-semibold text-primary">Хууль зүй</h3>
             <ul className="mt-4 space-y-3">
               {footerLinks.legal.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-[#1E0E62]"
+                    className="text-sm text-muted-foreground transition-colors hover:text-primary"
                   >
                     {link.label}
                   </Link>

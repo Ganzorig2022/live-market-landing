@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X, ShoppingBag } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
@@ -19,7 +19,7 @@ export function Header() {
       <nav className="container mx-auto bg-white rounded-[2rem] shadow-sm border border-border px-6 py-3 flex h-16 items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-xl font-bold text-[#1E0E62]">Live Market</span>
+          <span className="text-xl font-bold text-primary">Live Market</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -28,7 +28,7 @@ export function Header() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-[#1E0E62]"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             >
               {link.label}
             </a>
@@ -58,7 +58,7 @@ export function Header() {
               <a
                 key={link.href}
                 href={link.href}
-                className="block rounded-md px-3 py-2 text-base font-medium text-muted-foreground hover:bg-muted hover:text-[#1E0E62]"
+                className="block rounded-md px-3 py-2 text-base font-medium text-muted-foreground hover:bg-muted hover:text-primary"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.label}
@@ -68,7 +68,7 @@ export function Header() {
               <Button variant="outline" asChild className="w-full rounded-full">
                 <Link href="/login">Нэвтрэх</Link>
               </Button>
-              <Button asChild className="w-full bg-[#1E0E62] hover:bg-[#160A4D] rounded-full">
+              <Button asChild className="w-full bg-primary hover:bg-primary-hover rounded-full">
                 <Link href="/signup">Худалдаа эхлүүлэх</Link>
               </Button>
             </div>

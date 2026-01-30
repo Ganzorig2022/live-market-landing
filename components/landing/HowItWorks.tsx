@@ -32,13 +32,13 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-20 sm:py-24 bg-gradient-to-b from-purple-50/30 to-white">
+    <section id="how-it-works" className="py-20 sm:py-24 bg-gradient-to-b from-primary-light/30 to-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-[#1E0E62] sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">
             Эхлэхэд{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">3 хялбар алхам</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-brand">3 хялбар алхам</span>
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
             Live Market-ээр бизнесээ аль хэдийн өсгөж буй мянга мянган худалдагчидтай нэгдээрэй.
@@ -69,7 +69,7 @@ export function HowItWorks() {
                   </div>
 
                   {/* Content */}
-                  <h3 className="mt-6 text-xl font-semibold text-[#1E0E62]">{item.title}</h3>
+                  <h3 className="mt-6 text-xl font-semibold text-primary">{item.title}</h3>
                   <p className="mt-2 text-muted-foreground leading-relaxed">{item.description}</p>
 
                   {/* Arrow (mobile) */}

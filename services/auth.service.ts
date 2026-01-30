@@ -10,14 +10,14 @@ export interface LoginCredentials {
 export interface LoginResult {
   success: boolean;
   user?: {
-    id: number;
+    id: string;
     email: string;
     firstName: string;
     lastName: string;
     isAdmin: boolean;
-    businessId?: number;
+    businessId?: string;
     business?: {
-      id: number;
+      id: string;
       name: string;
     };
   };
@@ -50,7 +50,6 @@ export async function loginUser(credentials: LoginCredentials): Promise<LoginRes
 
     // Check if user is active
     if (!user.isActive) {
-      console.log("❌ user.isActive: ", user.isActive)
       return {
         success: false,
         error: "Your account is pending approval. You will receive an email once approved.",
@@ -58,6 +57,9 @@ export async function loginUser(credentials: LoginCredentials): Promise<LoginRes
     }
 
     // Verify password
+    if (!user.password) {
+      return { success: false, error: "Invalid email or password" };
+    }
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) {
       return { success: false, error: "Invalid email or password" };
